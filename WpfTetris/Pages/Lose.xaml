@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="WpfTetris.Pages.Lose"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ui="clr-namespace:WpfTetris.Utils"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid Background="White">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Foreground="Black" HorizontalAlignment="Center" Text="Вы проиграли." />
+            <TextBlock Foreground="Black" HorizontalAlignment="Center" Text="Выбирайте позицию фигур более разумно!" />
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="BorderBrush" Value="Black" />
+                        <Setter Property="BorderThickness" Value="2.5" />
+                    </Style>
+                </StackPanel.Resources>
+                <Button Visibility="Collapsed" Padding="0" Width="202" Height="58" Content="Переиграть уровень"
+                        ui:UIAttachedProperty.SplitToRectanglesScale="20"
+                        ui:UIAttachedProperty.SplitToRectangles="True" />
+                <Button x:Name="ExitToMenu" Margin="5" Padding="0" Width="202" Height="58" Content="Выйти в меню"
+                        ui:UIAttachedProperty.SplitToRectanglesScale="20"
+                        ui:UIAttachedProperty.SplitToRectangles="True" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

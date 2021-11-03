@@ -1,0 +1,46 @@
+﻿<Window x:Class="WpfTetris.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:pages="clr-namespace:WpfTetris.Pages"
+
+        mc:Ignorable="d"
+
+        Title="MainWindow" FontSize="18" FontFamily="./Resources/#PT Sans Narrow"
+
+        Height="589.2"
+        Width="800" Foreground="White">
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true"
+                                   Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                                   StrokeThickness="1" StrokeDashArray="1 2" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD" />
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070" />
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD" />
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1" />
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6" />
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B" />
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4" />
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5" />
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383" />
+    </Window.Resources>
+
+    <Grid>
+
+        <pages:Game Visibility="Collapsed" x:Name="GamePage" />
+        <pages:Menu Visibility="Collapsed" x:Name="MenuPage" />
+        <pages:Lose x:Name="LosePage" Visibility="Collapsed" />
+        <pages:ScoresList Visibility="Collapsed" x:Name="ScoresPage" />
+        <pages:TematicEditor Visibility="Collapsed" x:Name="TematicEditorPage" />
+        <pages:AccountEdit x:Name="AccountEditPage" Visibility="Collapsed"></pages:AccountEdit>
+    </Grid>
+</Window>

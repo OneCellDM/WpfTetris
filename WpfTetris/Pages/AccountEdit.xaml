@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="WpfTetris.Pages.AccountEdit"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:WpfTetris.Pages"
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="800" Foreground="White">
+    
+    <Grid>
+       <Grid.Background>
+            <SolidColorBrush Color="Black" Opacity="0.5"></SolidColorBrush>
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Image   Grid.RowSpan="4" Stretch="Fill"   gif:ImageBehavior.AnimateInDesignMode="True"  gif:ImageBehavior.AnimatedSource ="BackgroundGif.gif" />
+        <Border Grid.RowSpan="4">
+            <Border.Background>
+                <SolidColorBrush Color="Black" Opacity="0.2"/>
+            </Border.Background>
+        </Border>
+        <StackPanel HorizontalAlignment="Center" Margin="20" Orientation="Horizontal">
+            <Border  BorderThickness="2" BorderBrush="White">
+                <Image x:Name="ActiveImage" Stretch="Fill" Width="120" Height="120"/>
+            </Border> 
+            <StackPanel Margin="20,0" VerticalAlignment="Center">
+                <TextBlock Margin="0,0,0,10" FontSize="25" HorizontalAlignment="Center"  Text="Имя игрока"/>
+                <TextBox BorderThickness="2" CaretBrush="White" Padding="2,2"  Background="Transparent"  Foreground="White"  FontSize="20" x:Name="NickNameTextBox" Width="200"  HorizontalContentAlignment="Center"/>
+            </StackPanel>
+        </StackPanel>
+        <TextBlock Margin="20" FontSize="25" Text="Доступные аватары" Grid.Row="1" HorizontalAlignment="Center"></TextBlock>
+        <Border  Grid.Row="2">
+            <Border.Background>
+                <SolidColorBrush Color="Black" Opacity="0.0"></SolidColorBrush>
+            </Border.Background>
+            <ListView VirtualizingPanel.ScrollUnit="Pixel" Margin="100,0" ScrollViewer.VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Center"   Padding="0"  Background="Transparent"   BorderThickness="0" SelectionChanged="ImagesList_SelectionChanged"   x:Name="ImagesList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Margin" Value="20"></Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+                    
+            </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border  BorderThickness="5" BorderBrush="White">
+                            <Image Source="{Binding}" Stretch="Fill" Width="180" Height="180"/>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                
+        </ListView>
+        </Border>
+        <StackPanel HorizontalAlignment="Center" Grid.Row="3" Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Padding" Value="12"/>
+                    <Setter Property="Margin" Value="10"/>
+                    <Setter Property="Width" Value="300"/>
+                    <Setter Property="MinWidth" Value="100"/>
+                    <Setter Property="FontSize" Value="20"/>
+                </Style>
+            </StackPanel.Resources>
+            <Button x:Name="SaveButton"   Content="Сохранить" Click="SaveButton_Click"/>
+            <Button x:Name="CloseButton" Content="Выйти" Click="CloseButton_Click"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
