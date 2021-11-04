@@ -55,9 +55,9 @@ namespace WpfTetris.Utils
                 {
                     (string name, int score) resTuple = (string.Empty, 0);
 
-                    int ord = reader.GetOrdinal("name");
-                    var nameValue =reader.GetValue(ord);
-                    var scoreValue =  (int) reader.GetUInt32(reader.GetOrdinal("score"));
+                    var ord = reader.GetOrdinal("name");
+                    var nameValue = reader.GetValue(ord);
+                    var scoreValue = (int) reader.GetUInt32(reader.GetOrdinal("score"));
 
                     if (nameValue is string) resTuple.name = (string) nameValue;
 
@@ -117,7 +117,7 @@ namespace WpfTetris.Utils
         }
 
 
-        public async Task UpdateScore(int id,int score)
+        public async Task UpdateScore(int id, int score)
         {
             MySqlCommand command = null;
             try
@@ -143,7 +143,8 @@ namespace WpfTetris.Utils
             try
             {
                 await OpenConnection();
-                command = new MySqlCommand($"SELECT id FROM {TableName} WHERE guid='{guid}' AND name = '{name}'", _MySqlConnection);
+                command = new MySqlCommand($"SELECT id FROM {TableName} WHERE guid='{guid}' AND name = '{name}'",
+                    _MySqlConnection);
                 var res = await command.ExecuteScalarAsync();
 
                 return res == null ? -1 : (int) res;

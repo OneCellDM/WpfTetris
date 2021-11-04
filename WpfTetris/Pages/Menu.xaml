@@ -392,29 +392,30 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition  />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
             <TextBlock HorizontalAlignment="Center" Text="TETRIS" Margin="0,40,0,40" FontSize="60"
                        FontFamily="../Resources/#Tetris Block" Foreground="Black" />
         </StackPanel>
-        <StackPanel x:Name="AccountPanel"  Grid.Row="1" HorizontalAlignment="Center" Margin="20" Orientation="Horizontal">
+        <StackPanel x:Name="AccountPanel" Grid.Row="1" HorizontalAlignment="Center" Margin="20"
+                    Orientation="Horizontal">
             <StackPanel.Background>
-                <SolidColorBrush Color="Black" Opacity="0.00"></SolidColorBrush>
+                <SolidColorBrush Color="Black" Opacity="0.00" />
             </StackPanel.Background>
-            <Border Margin="10"  BorderThickness="2" BorderBrush="Black">
-                <Image x:Name="ActiveImage" Stretch="Fill" Width="80" Height="80"/>
+            <Border Margin="10" BorderThickness="2" BorderBrush="Black">
+                <Image x:Name="ActiveImage" Stretch="Fill" Width="80" Height="80" />
             </Border>
-       
-                <TextBlock  Margin="10,0"   
-                            FontSize="25" 
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center" 
-                            Foreground="Black"  
-                            x:Name="NickNameText"/>
-            
+
+            <TextBlock Margin="10,0"
+                       FontSize="25"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Foreground="Black"
+                       x:Name="NickNameText" />
+
         </StackPanel>
-        <Border Grid.Row="2" VerticalAlignment="Top" Margin="0,30,0,0" HorizontalAlignment="Center"  BorderThickness="5">
+        <Border Grid.Row="2" VerticalAlignment="Top" Margin="0,30,0,0" HorizontalAlignment="Center" BorderThickness="5">
 
             <Border.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -450,6 +451,10 @@
                         <Button x:Name="RecordTable" Foreground="Black" Content="Таблица рекордов" Background="Lime"
                                 Width="400" Height="60" ui:UIAttachedProperty.SplitToRectanglesScale="20"
                                 ui:UIAttachedProperty.SplitToRectangles="True" Click="RecordTable_Click" />
+
+                        <Button Foreground="White" Content="Настройки" Background="#42aaff" Width="400" Height="60"
+                                ui:UIAttachedProperty.SplitToRectanglesScale="20"
+                                ui:UIAttachedProperty.SplitToRectangles="True" Click="SettingsButton_Click" />
                         <Button Foreground="White" Content="Помощь" Background="#42aaff" Width="400" Height="60"
                                 ui:UIAttachedProperty.SplitToRectanglesScale="20"
                                 ui:UIAttachedProperty.SplitToRectangles="True" />

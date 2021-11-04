@@ -2,10 +2,10 @@
 
 namespace WpfTetris.Pages
 {
-	/// <summary>
-	///     Логика взаимодействия для Lose.xaml
-	/// </summary>
-	public partial class Lose : UserControl
+    /// <summary>
+    ///     Логика взаимодействия для Lose.xaml
+    /// </summary>
+    public partial class Lose : UserControl
     {
         public Lose()
         {

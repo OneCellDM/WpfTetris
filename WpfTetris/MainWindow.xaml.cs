@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Input;
 using WpfTetris.Logic;
 using WpfTetris.Models;
 using WpfTetris.Utils;
@@ -8,7 +9,7 @@ namespace WpfTetris
 {
     public partial class MainWindow : Window
     {
-        private bool f;
+        private bool Started = false;
 
         public MainWindow()
         {
@@ -21,12 +22,21 @@ namespace WpfTetris
             {
             }
 
+            PausePage.ExitEvent += PausePage_ExitEvent;
+
+            PausePage.OpenHelpEvent += PausePage_OpenHelpEvent;
+
+            PausePage.ContinueEvent += PausePage_ContinueEvent;
+
             AccountEditPage.CloseEvent += AccountEditPage_CloseEvent;
+            SettingsPage.CloseEvent += SettingsPage_CloseEvent;
 
             TematicEditorPage.CloseEvent += TematicEditorPage_CloseEvent;
             TematicEditorPage.StartGameEvent += SetGameEventHandler;
+
             ScoresPage.CloseEvent += ScoresPage_CloseEvent;
 
+            MenuPage.OpenSettingsEvent += MenuPage_OpenSettingsEvent;
             MenuPage.OpenCreateYouGameEvent += MenuPage_OpenCreateYouGameEvent;
             MenuPage.OpenScoreListEvent += MenuPage_OpenScoreListEvent;
             MenuPage.SetGameEvent += SetGameEventHandler;
@@ -41,7 +51,41 @@ namespace WpfTetris
             OpenPage(MenuPage);
         }
 
-        private void AccountPanel_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void PausePage_ContinueEvent()
+        {
+            if (Game != null)
+            {
+                OpenPage(GamePage);
+                Game.ResumeGame();
+            }
+        }
+
+        private void PausePage_OpenHelpEvent()
+        {
+        }
+
+        private void PausePage_ExitEvent()
+        {
+            if (Game != null)
+            {
+                Game.StopGame();
+                OpenPage(MenuPage);
+            }
+        }
+
+        private void SettingsPage_CloseEvent()
+        {
+            OpenPage(MenuPage);
+        }
+
+        private void MenuPage_OpenSettingsEvent()
+        {
+            OpenPage(SettingsPage);
+        }
+
+        public GameLogic Game { get; set; }
+
+        private void AccountPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             AccountEditPage.Load();
             OpenPage(AccountEditPage);
@@ -55,8 +99,6 @@ namespace WpfTetris
             OpenPage(MenuPage);
         }
 
-        public GameLogic Game { get; set; }
-
         public void OpenPage(FrameworkElement element)
         {
             LosePage.Visibility = Visibility.Collapsed;
@@ -65,6 +107,8 @@ namespace WpfTetris
             TematicEditorPage.Visibility = Visibility.Collapsed;
             MenuPage.Visibility = Visibility.Collapsed;
             AccountEditPage.Visibility = Visibility.Collapsed;
+            SettingsPage.Visibility = Visibility.Collapsed;
+            PausePage.Visibility = Visibility.Collapsed;
 
             element.Visibility = Visibility.Visible;
         }
@@ -98,40 +142,47 @@ namespace WpfTetris
 
         private void SetGameEventHandler(Level level)
         {
-            if (f)
+            if (Game != null)
             {
-                Deactivated -= Game.Deactivated;
-                Activated -= Game.Activated;
-                KeyDown -= Game.KeyDown;
+                UnSubscribeGamesEvent();
+                Game.PauseEvent -= Game_PauseEvent;
             }
 
             Game = null;
             GC.Collect(0);
 
             Game = new GameLogic(GamePage, level);
-
+            Game.PauseEvent += Game_PauseEvent;
             Game.LoseWindow = LosePage;
             Game.Menu = MenuPage;
-            Deactivated += Game.Deactivated;
-            Activated += Game.Activated;
-            KeyDown += Game.KeyDown;
 
             GamePage.NickName.Text = PlayerManager.CurrentPlayer.NickName;
             GamePage.AvatarImage.Source = PlayerManager.AvatarSource;
 
-
             OpenPage(GamePage);
 
-            Game.StartLevel();
-            f = true;
+            Game.StartGame();
+            SubscribeGamesEvent();
         }
 
-        private void Window_Deactivated(object sender, EventArgs e)
+        private void Game_PauseEvent()
         {
+            Game?.PauseGame();
+            OpenPage(PausePage);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public void SubscribeGamesEvent()
         {
+            Deactivated += Game.Deactivated;
+            Activated += Game.Activated;
+            KeyDown += Game.KeyDown;
+        }
+
+        public void UnSubscribeGamesEvent()
+        {
+            Deactivated -= Game.Deactivated;
+            Activated -= Game.Activated;
+            KeyDown -= Game.KeyDown;
         }
     }
 }

@@ -8,9 +8,14 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid Background="White">
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Foreground="Black" HorizontalAlignment="Center" Text="Вы проиграли." />
-            <TextBlock Foreground="Black" HorizontalAlignment="Center" Text="Выбирайте позицию фигур более разумно!" />
+        <MediaElement x:Name="VideoElement" IsMuted="True" Stretch="Fill" LoadedBehavior="Manual"
+                      Source="../Resources/Lose.mp4" />
+        <StackPanel Width="300" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel.Background>
+                <SolidColorBrush Color="Black" Opacity="0.4" />
+            </StackPanel.Background>
+            <TextBlock Foreground="White" HorizontalAlignment="Center" Text="Игра окончена." />
+            <TextBlock Foreground="White" HorizontalAlignment="Center" Text="Выбирайте позицию фигур более разумно!" />
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel.Resources>

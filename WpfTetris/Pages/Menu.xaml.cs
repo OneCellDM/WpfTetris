@@ -1,15 +1,16 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using WpfTetris.Enums;
 using WpfTetris.Models;
 
 namespace WpfTetris.Pages
 {
-	/// <summary>
-	///     Логика взаимодействия для Menu.xaml
-	/// </summary>
-	public partial class Menu : UserControl
+    /// <summary>
+    ///     Логика взаимодействия для Menu.xaml
+    /// </summary>
+    public partial class Menu : UserControl
     {
         public delegate void OpenPage();
 
@@ -23,6 +24,7 @@ namespace WpfTetris.Pages
         public event SetGame SetGameEvent;
         public event OpenPage OpenScoreListEvent;
         public event OpenPage OpenCreateYouGameEvent;
+        public event OpenPage OpenSettingsEvent;
 
         private void StandartGame(object sender, RoutedEventArgs e)
         {
@@ -192,9 +194,13 @@ namespace WpfTetris.Pages
             OpenCreateYouGameEvent?.Invoke();
         }
 
-        private void AccountPanel_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void AccountPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+        }
 
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenSettingsEvent.Invoke();
         }
     }
 }

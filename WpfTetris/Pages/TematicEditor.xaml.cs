@@ -6,16 +6,15 @@ using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using WpfTetris.Enums;
+using WpfTetris.Interfaces;
 using WpfTetris.Models;
 using WpfTetris.Utils;
 using UserControl = System.Windows.Controls.UserControl;
 
 namespace WpfTetris.Pages
 {
-    public partial class TematicEditor : UserControl,ICloseControl
+    public partial class TematicEditor : UserControl, ICloseControl
     {
-       
-
         public delegate void StartGame(Level level);
 
         private readonly Level _DefaultLevel = new Level
@@ -132,25 +131,22 @@ namespace WpfTetris.Pages
         private (bool res, List<string> ErrorsInfo) DataIsValide()
         {
             var valide = true;
-            var ErrorsInfo = new List<string>();
+            var errorsInfo = new List<string>();
             string[] exstentions = null;
 
-            //Если выбран цвет
             if (BackgroundTypeCombox.SelectedIndex == 0)
             {
                 if (!Validators.BrushTextBoxValidation(BackgroundTextBox))
                 {
-                    ErrorsInfo.Add("Цвет фона имеет неверный формат");
+                    errorsInfo.Add("Цвет фона имеет неверный формат");
                     valide = false;
                 }
             }
             else
             {
-                //Если выбранна картинка
                 if (BackgroundTypeCombox.SelectedIndex == 1)
                     exstentions = new[] {".png", ".jpg", ".jpeg", ".bmp"};
 
-                //Если выбранно видео
                 else
                     exstentions = new[] {".mp4", ".avi"};
 
@@ -158,12 +154,12 @@ namespace WpfTetris.Pages
                 var pathValidatorRes = Validators.PathTextBoxValidation(exstentions, BackgroundTextBox);
                 if (!pathValidatorRes.res)
                 {
-                    ErrorsInfo.Add("Фон: " + pathValidatorRes.exception);
+                    errorsInfo.Add("Фон: " + pathValidatorRes.exception);
                     valide = false;
                 }
             }
 
-            if (UseAudioCheckBox.IsChecked is true)
+            if (UseAudioCheckBox.IsChecked == true)
             {
                 exstentions = new[] {".mp3"};
                 var PathValidatorRes = Validators.PathTextBoxValidation(exstentions, AudioFilePathTextBox);
@@ -171,14 +167,15 @@ namespace WpfTetris.Pages
                 {
                     Level.Audio = AudioFilePathTextBox.Text;
                 }
+
                 else
                 {
-                    ErrorsInfo.Add("Аудиофайл: " + PathValidatorRes.exception);
+                    errorsInfo.Add("Аудиофайл: " + PathValidatorRes.exception);
                     valide = false;
                 }
             }
 
-            return (valide, ErrorsInfo);
+            return (valide, errorsInfo);
         }
 
         private void BackgroundTypeCombox_SelectionChanged(object sender, SelectionChangedEventArgs e)

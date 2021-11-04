@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using WpfTetris.Interfaces;
 using WpfTetris.Models;
 using WpfTetris.Utils;
 
@@ -11,10 +12,8 @@ namespace WpfTetris.Pages
     /// <summary>
     ///     Логика взаимодействия для ScoresList.xaml
     /// </summary>
-    public partial class ScoresList : UserControl,ICloseControl
+    public partial class ScoresList : UserControl, ICloseControl
     {
-        
-
         public ScoresList()
         {
             InitializeComponent();
@@ -32,17 +31,21 @@ namespace WpfTetris.Pages
             try
             {
                 var res = (await MysqlManager.Instance.GetScores()).OrderByDescending(x => x.score);
-                if (res.Count() == 0)
-                    throw new NotImplementedException();
-                foreach (var item in res)
-                    Dispatcher.Invoke(() =>
-                    {
-                        ScoresListview.Items.Add(new ScoreInfo
+                if (res?.Count() == 0)
+                {
+                }
+                else
+                {
+                    foreach (var item in res)
+                        Dispatcher.Invoke(() =>
                         {
-                            Name = string.IsNullOrEmpty(item.name) ? "Неизвестный" : item.name,
-                            Score = item.score
-                        });
-                    }, DispatcherPriority.Background);
+                            ScoresListview.Items.Add(new ScoreInfo
+                            {
+                                Name = string.IsNullOrEmpty(item.name) ? "Неизвестный" : item.name,
+                                Score = item.score
+                            });
+                        }, DispatcherPriority.Background);
+                }
             }
             catch (Exception)
             {
