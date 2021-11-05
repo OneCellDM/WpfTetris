@@ -23,12 +23,11 @@ namespace WpfTetris
             }
 
             PausePage.ExitEvent += PausePage_ExitEvent;
-
             PausePage.OpenHelpEvent += PausePage_OpenHelpEvent;
-
             PausePage.ContinueEvent += PausePage_ContinueEvent;
 
             AccountEditPage.CloseEvent += AccountEditPage_CloseEvent;
+
             SettingsPage.CloseEvent += SettingsPage_CloseEvent;
 
             TematicEditorPage.CloseEvent += TematicEditorPage_CloseEvent;
@@ -36,11 +35,16 @@ namespace WpfTetris
 
             ScoresPage.CloseEvent += ScoresPage_CloseEvent;
 
+            InfoPage.CloseEvent += InfoPage_CloseEvent;
+
+            HelpPage.CloseEvent += HelpPage_CloseEvent;
+
+            MenuPage.OpenHelpEvent += MenuPage_OpenHelpEvent;
             MenuPage.OpenSettingsEvent += MenuPage_OpenSettingsEvent;
             MenuPage.OpenCreateYouGameEvent += MenuPage_OpenCreateYouGameEvent;
             MenuPage.OpenScoreListEvent += MenuPage_OpenScoreListEvent;
+            MenuPage.OpenInfoEvent += MenuPage_OpenInfoEvent;
             MenuPage.SetGameEvent += SetGameEventHandler;
-
             MenuPage.AccountPanel.MouseLeftButtonDown += AccountPanel_MouseLeftButtonDown;
 
             PlayerManager.SetRandomAvatar();
@@ -51,12 +55,34 @@ namespace WpfTetris
             OpenPage(MenuPage);
         }
 
+        private void HelpPage_CloseEvent()
+        {
+            OpenPage(MenuPage);
+        }
+
+        private void MenuPage_OpenHelpEvent()
+        {
+            OpenPage(HelpPage);
+        }
+
+        private void InfoPage_CloseEvent()
+        {
+            OpenPage(MenuPage);
+        }
+
+        private void MenuPage_OpenInfoEvent()
+        {
+            OpenPage(InfoPage);
+        }
+
         private void PausePage_ContinueEvent()
         {
             if (Game != null)
             {
-                OpenPage(GamePage);
                 Game.ResumeGame();
+                PausePage.VolumeSlider.ValueChanged -= VolumeSlider_ValueChanged;
+                OpenPage(GamePage);
+               
             }
         }
 
@@ -70,6 +96,8 @@ namespace WpfTetris
             {
                 Game.StopGame();
                 OpenPage(MenuPage);
+                PausePage.VolumeSlider.ValueChanged -= VolumeSlider_ValueChanged;
+                Game.PauseEvent -= Game_PauseEvent;
             }
         }
 
@@ -109,6 +137,8 @@ namespace WpfTetris
             AccountEditPage.Visibility = Visibility.Collapsed;
             SettingsPage.Visibility = Visibility.Collapsed;
             PausePage.Visibility = Visibility.Collapsed;
+            InfoPage.Visibility = Visibility.Collapsed;
+            HelpPage.Visibility = Visibility.Collapsed;
 
             element.Visibility = Visibility.Visible;
         }
@@ -168,7 +198,15 @@ namespace WpfTetris
         private void Game_PauseEvent()
         {
             Game?.PauseGame();
+            PausePage.VolumeSlider.Value = Settings.AudioVolume;
+            PausePage.VolumeSlider.ValueChanged += VolumeSlider_ValueChanged;
             OpenPage(PausePage);
+        }
+
+        private void VolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Settings.AudioVolume = e.NewValue;
+            Game.SetVolume(e.NewValue);
         }
 
         public void SubscribeGamesEvent()

@@ -7,20 +7,23 @@ namespace WpfTetris.Pages
     public partial class GameSettings : UserControl, ICloseControl
     {
         private string oldText = "3000";
-        private int max = 5000000;
+        
 
         public GameSettings()
         {
             InitializeComponent();
 
-            EndDownDelaySlider.Value = Settings.EndDownDelay;
-            EndDownDelaySlider.Maximum = 500;
-            EndDownDelaySlider.Minimum = 100;
-            VolumeSlider.Value = Settings.AudioVolume;
-
             StartDownDelaySlider.Value = Settings.StartDownDelay;
             StartDownDelaySlider.Minimum = Settings.EndDownDelay;
             StartDownDelaySlider.Maximum = 500;
+
+            EndDownDelaySlider.Value = Settings.EndDownDelay;
+            EndDownDelaySlider.Maximum = 500;
+            EndDownDelaySlider.Minimum = 100;
+            DownDelayChangeSlider.Value = Settings.DelayChange;
+            VolumeSlider.Value = Settings.AudioVolume;
+
+            
 
             ScoreTextbox.Text = oldText;
         }
@@ -72,6 +75,11 @@ namespace WpfTetris.Pages
         private void ShowShadowCheckbox_Unchecked(object sender, System.Windows.RoutedEventArgs e)
         {
             ColorPanel.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        private void StartDownDelaySlider_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
+        {
+            EndDownDelaySlider.Maximum = e.NewValue;
         }
     }
 }

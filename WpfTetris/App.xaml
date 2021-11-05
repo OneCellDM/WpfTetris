@@ -3,7 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-
-        <FontFamily x:Key="TetrisFont">./Resources/Tetris Block.ttf#Tetris Block</FontFamily>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/CheckBoxStyle.xaml"/>
+                <ResourceDictionary Source="Styles/GameInfoStyle.xaml"/>
+                <ResourceDictionary Source="Styles/ScrollBarStyle.xaml"/>
+                <ResourceDictionary Source="Styles/OtherScrollBarStyle.xaml"/>
+                <ResourceDictionary Source="Styles/SliderStyle.xaml"/>
+                <ResourceDictionary Source="Styles/ButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <FontFamily x:Key="TetrisFont">./Resources/Tetris Block.ttf#Tetris Block</FontFamily>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

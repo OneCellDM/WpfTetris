@@ -30,7 +30,32 @@ namespace WpfTetris.Pages
         {
             try
             {
+                ScoresListview.Items.Add(new ScoreInfo
+                {
+                    Name = "Текущая сессия. Количество игроков:",
+                    Score = PlayerManager.Players.Count,
+                }) ;
+                foreach(var player in PlayerManager.Players)
+                {
+                    foreach(int score in player.Scores)
+                    {
+                        Dispatcher.Invoke(() =>
+                        {
+                            ScoresListview.Items.Add(new ScoreInfo
+                            {
+                                Name = player.NickName,
+                                Score = score,
+                            });
+                        }, DispatcherPriority.Background);
+                    }
+                }
+                
                 var res = (await MysqlManager.Instance.GetScores()).OrderByDescending(x => x.score);
+                ScoresListview.Items.Add(new ScoreInfo
+                {
+                    Name = "Счет всех игроков. Количество игроков:",
+                    Score=res.Count(),
+                });
                 if (res?.Count() == 0)
                 {
                 }

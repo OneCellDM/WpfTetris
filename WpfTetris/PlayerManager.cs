@@ -19,7 +19,8 @@ namespace WpfTetris
         }
 
         public static Guid SessionUID { get; }
-        public static Player CurrentPlayer { get; set; }
+        private static Player _CurrentPlayer;
+        public static Player CurrentPlayer { get => _CurrentPlayer; set { _CurrentPlayer = value; Players.Add(_CurrentPlayer); } }
         public static string AvatarPath { get; set; }
 
         public static ImageSource AvatarSource =>

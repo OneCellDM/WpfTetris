@@ -4,20 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ui="clr-namespace:WpfTetris.Utils"
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid Background="White">
-        <MediaElement x:Name="VideoElement" IsMuted="True" Stretch="Fill" LoadedBehavior="Manual"
-                      Source="../Resources/Lose.mp4" />
-        <StackPanel Width="300" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Image Stretch="Fill" gif:ImageBehavior.AnimatedSource="/WpfTetris;component/Resources/Images/Lose.gif" gif:ImageBehavior.AutoStart="True" gif:ImageBehavior.AnimateInDesignMode="True"  ></Image>
+      
+        <StackPanel Width="300"  HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel.Background>
                 <SolidColorBrush Color="Black" Opacity="0.4" />
             </StackPanel.Background>
-            <TextBlock Foreground="White" HorizontalAlignment="Center" Text="Игра окончена." />
+            <TextBlock Foreground="White" HorizontalAlignment="Center"  Margin="10" Text="Игра окончена." />
             <TextBlock Foreground="White" HorizontalAlignment="Center" Text="Выбирайте позицию фигур более разумно!" />
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Margin="10"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel.Resources>
                     <Style TargetType="Button">
                         <Setter Property="BorderBrush" Value="Black" />

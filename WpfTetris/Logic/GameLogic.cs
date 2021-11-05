@@ -291,6 +291,7 @@ namespace WpfTetris.Logic
         {
             Game.Dispatcher.Invoke(() =>
             {
+                StartTimers();
                 _AudioPlayer.Play();
                 if (Isvideo)
                     Game.VideoElement.Play();
@@ -328,10 +329,7 @@ namespace WpfTetris.Logic
             {
                 LoseWindow.Visibility = Visibility.Visible;
                 Game.Visibility = Visibility.Collapsed;
-                LoseWindow.VideoElement.LoadedBehavior = MediaState.Manual;
-                LoseWindow.VideoElement.UnloadedBehavior = MediaState.Manual;
-                LoseWindow.VideoElement.Play();
-                LoseWindow.VideoElement.MediaOpened += LoseVideoElement_MediaOpened;
+              
                 LoseWindow.ExitToMenu.Click += ExitToMenu_Click;
 
                 SaveScore();
@@ -340,8 +338,12 @@ namespace WpfTetris.Logic
 
         private void LoseVideoElement_MediaOpened(object sender, RoutedEventArgs e)
         {
-            if (!Exit)
-                LoseWindow.VideoElement.Play();
+           
+        }
+        public void SetVolume(double volume)
+        {
+            if(_AudioPlayer!=null)
+                _AudioPlayer.Volume = volume;
         }
 
         public void InitTimers(double downElapsed)
@@ -580,14 +582,17 @@ namespace WpfTetris.Logic
             }
 
             if (collision == Collision.None)
+            {
                 for (var i = 0; i < 4; i++)
                 {
                     var temp = _Shape[i, 0];
                     var x = maxy - (maxx - _Shape[i, 1]);
-                    var y = maxx - (3 - (maxy - temp)) + 1;
+                    var y = maxx - (4 - (maxy - temp)) + 1;
                     _Shape[i, 0] = x;
                     _Shape[i, 1] = y;
                 }
+                MoveShape(Direction.Down);
+            }
         }
 
         private void ClearShape()
@@ -714,7 +719,7 @@ namespace WpfTetris.Logic
             Game.Dispatcher.Invoke(() =>
             {
                 Exit = true;
-                LoseWindow.VideoElement.Stop();
+             
                 Menu.Visibility = Visibility.Visible;
                 Game.Visibility = Visibility.Collapsed;
                 LoseWindow.Visibility = Visibility.Collapsed;
@@ -739,6 +744,7 @@ namespace WpfTetris.Logic
         {
             try
             {
+                PlayerManager.CurrentPlayer.AddScore(_Score);
                 if (_Score > 0)
                 {
                     var session = PlayerManager.SessionUID.ToString();
@@ -749,10 +755,13 @@ namespace WpfTetris.Logic
                     }
                     else
                     {
-                        PlayerManager.CurrentPlayer.AddScore(_Score);
+                       
                         var max = PlayerManager.CurrentPlayer.GetMaxScore();
+
                         var id = await MysqlManager.Instance.GetIdFromNameAndGuid(session, nick);
+
                         if (id > -1) await MysqlManager.Instance.UpdateScore(id, _Score);
+
                         else await MysqlManager.Instance.InsertScore(_Score, session, nick);
                     }
                 }
@@ -765,12 +774,13 @@ namespace WpfTetris.Logic
 
         public void Activated(object sender, EventArgs e)
         {
-            StartTimers();
+            ResumeGame();
         }
 
         public void Deactivated(object sender, EventArgs e)
         {
-            StopTimers();
+            PauseGame();
+            
         }
     }
 }

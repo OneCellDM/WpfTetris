@@ -6,25 +6,7 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <Style x:Key="Textb" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="30" />
-            <Setter Property="Margin" Value="0 ,10" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="FontFamily" Value="/Resources/#PT Sans Narrow" />
-        </Style>
-        <Style x:Key="Bordb" TargetType="Border">
-            <Setter Property="HorizontalAlignment" Value="Right" />
-            <Setter Property="BorderBrush" Value="White" />
-            <Setter Property="BorderThickness" Value="2" />
-            <Setter Property="Padding" Value="10,0" />
-            <Setter Property="Width" Value="215" />
-            <Setter Property="Margin" Value="0,20,0,0" />
-            <Setter Property="Background">
-                <Setter.Value>
-                    <SolidColorBrush Color="Black" Opacity="0.8" />
-                </Setter.Value>
-            </Setter>
-        </Style>
+      
     </UserControl.Resources>
 
     <Grid>
@@ -38,14 +20,14 @@
                       Stretch="Fill" Balance="0" Volume="0.0" />
 
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,22">
-            <Border Style="{StaticResource Bordb}">
-                <TextBlock x:Name="LevelText" Style="{StaticResource Textb}" />
+            <Border Style="{DynamicResource InfoBorderStyle}">
+                <TextBlock x:Name="LevelText" Style="{DynamicResource InfoTextStyle}" />
             </Border>
-            <Border Style="{StaticResource Bordb}">
-                <TextBlock x:Name="ScoreText" Style="{StaticResource Textb}" />
+            <Border Style="{DynamicResource InfoBorderStyle}">
+                <TextBlock x:Name="ScoreText"  Style="{DynamicResource InfoTextStyle}" />
             </Border>
-            <Border Style="{StaticResource Bordb}">
-                <TextBlock x:Name="LineText" Style="{StaticResource Textb}" />
+            <Border Style="{DynamicResource InfoBorderStyle}">
+                <TextBlock x:Name="LineText" Style="{DynamicResource InfoTextStyle}" />
             </Border>
 
         </StackPanel>
@@ -61,25 +43,30 @@
         </Border>
 
         <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,22">
-            <Border Style="{StaticResource Bordb}">
-                <TextBlock Style="{StaticResource Textb}" x:Name="TimeText" />
+            <Border Style="{DynamicResource InfoBorderStyle}">
+                <TextBlock Style="{DynamicResource InfoTextStyle}" x:Name="TimeText" />
             </Border>
 
-            <Border Height="130" Style="{StaticResource Bordb}">
+            <Border Height="130" Style="{DynamicResource InfoBorderStyle}">
                 <StackPanel HorizontalAlignment="Center">
-                    <TextBlock Style="{StaticResource Textb}" Text="Следующая:" />
+                    <TextBlock Style="{DynamicResource InfoTextStyle}" Text="Следующая:" />
                     <Canvas x:Name="NextCanvas" HorizontalAlignment="Center" Margin="-20,0,0,0" />
                 </StackPanel>
             </Border>
         </StackPanel>
-        <Border Width="200" Padding="0" Style="{StaticResource Bordb}" Margin="0" HorizontalAlignment="Left"
+        <Border   Width="280"  Padding="0" Style="{DynamicResource InfoBorderStyle}" Margin="0" HorizontalAlignment="Left"
                 VerticalAlignment="Bottom">
-            <StackPanel Orientation="Horizontal">
-                <Border Padding="0" BorderThickness="0,0,1,0" BorderBrush="White" Margin="0" Width="80" Height="80">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                    
+                <Border Grid.Column="0" Padding="0" BorderThickness="0,0,1,0" BorderBrush="White" Margin="0" Width="80" Height="80">
                     <Image x:Name="AvatarImage" Stretch="Fill" />
                 </Border>
-                <TextBlock x:Name="NickName" Margin="10,0" Text="Даниил" VerticalAlignment="Center" />
-            </StackPanel>
+                <TextBlock Grid.Column="1" TextWrapping="Wrap" HorizontalAlignment="Center"  x:Name="NickName" Margin="10,0" Text="Даниил" VerticalAlignment="Center" />
+            </Grid>
         </Border>
     </Grid>
 </UserControl>

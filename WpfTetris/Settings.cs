@@ -29,7 +29,7 @@ namespace WpfTetris
         static Settings()
         {
             StartDownDelay = 500;
-            EndDownDelay = 50;
+            EndDownDelay = 100;
             DelayChange = 25;
             NextLevelScore = 3000;
             AudioVolume = 0.5;

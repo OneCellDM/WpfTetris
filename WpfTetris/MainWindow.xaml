@@ -23,6 +23,8 @@
         <pages:TematicEditor Visibility="Collapsed" x:Name="TematicEditorPage" />
         <pages:AccountEdit x:Name="AccountEditPage" Visibility="Collapsed" />
         <pages:GameSettings x:Name="SettingsPage" Visibility="Collapsed" />
-        <pages:Pause x:Name="PausePage" />
+        <pages:Pause x:Name="PausePage" Visibility="Collapsed"  />
+        <pages:Info x:Name="InfoPage"  Visibility="Collapsed"/>
+        <pages:Help x:Name="HelpPage" ></pages:Help>
     </Grid>
 </Window>

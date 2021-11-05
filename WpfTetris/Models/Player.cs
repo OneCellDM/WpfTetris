@@ -5,7 +5,7 @@ namespace WpfTetris.Models
 {
     public class Player
     {
-        private readonly List<int> _Scores = new List<int>();
+       public readonly List<int> Scores = new List<int>();
 
         public Player(string nickName)
         {
@@ -16,12 +16,12 @@ namespace WpfTetris.Models
 
         public void AddScore(int score)
         {
-            _Scores.Add(score);
+            Scores.Add(score);
         }
 
         public int GetMaxScore()
         {
-            return _Scores.Max();
+            return Scores.Max();
         }
     }
 }

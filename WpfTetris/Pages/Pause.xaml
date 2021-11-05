@@ -361,9 +361,11 @@
             </StackPanel.Background>
 
             <StackPanel.Resources>
-                <Style TargetType="Button">
+                <Style TargetType="Button"  BasedOn="{StaticResource ButtonStyle}">
                     <Setter Property="Margin" Value="20" />
-                    <Setter Property="Foreground" Value="Black" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="BorderThickness" Value="2"/>
                 </Style>
             </StackPanel.Resources>
             <TextBlock Margin="20" Text="Пауза" HorizontalAlignment="Center" FontSize="30" />
@@ -375,34 +377,35 @@
             </TextBlock>
             <Slider Margin="20,10,20,10" x:Name="VolumeSlider" Maximum="1" LargeChange="0.1" />
 
-
-            <Button x:Name="BackToGameButton" BorderThickness="3"
+            
+            <Button x:Name="BackToGameButton" 
                     BorderBrush="Black"
-                    Foreground="Black"
+                 
                     Visibility="Visible"
                     Padding="0"
                     Width="202" Height="58" Content="Продолжить"
                     ui:UIAttachedProperty.SplitToRectanglesScale="20"
-                    ui:UIAttachedProperty.SplitToRectangles="True" Click="BackToGameButton_Click" />
+                    Click="BackToGameButton_Click" />
 
-            <Button x:Name="HelpButton" BorderThickness="3"
+            <Button x:Name="HelpButton" 
                     BorderBrush="Black"
-                    Foreground="Black"
+                   
                     Visibility="Visible"
                     Padding="0"
                     Width="202" Height="58" Content="Помощь"
                     ui:UIAttachedProperty.SplitToRectanglesScale="20"
-                    ui:UIAttachedProperty.SplitToRectangles="True" Click="HelpButton_Click" />
+                     Click="HelpButton_Click" />
 
 
-            <Button x:Name="ExitButton" BorderThickness="3"
+            <Button x:Name="ExitButton" 
                     BorderBrush="Black"
-                    Foreground="Black"
+                  
                     Visibility="Visible"
                     Padding="0"
                     Width="202" Height="58" Content="Выйти"
                     ui:UIAttachedProperty.SplitToRectanglesScale="20"
-                    ui:UIAttachedProperty.SplitToRectangles="True" Click="ExitButton_Click" />
+                     Click="ExitButton_Click" />
+            <TextBlock HorizontalAlignment="Center" Text="При выходе из игры,  рекорд не будет сохранен." Margin="0,0,0,20"></TextBlock>
         </StackPanel>
     </Grid>
 </UserControl>
