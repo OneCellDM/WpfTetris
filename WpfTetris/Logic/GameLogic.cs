@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Timers;
 using System.Windows;
@@ -201,63 +202,70 @@ namespace WpfTetris.Logic
 
         public void KeyDown(object sender, KeyEventArgs e)
         {
-            Check = true;
-            ClearShape();
-            var collision = Collision.None;
-            switch (e.Key)
+            try
             {
-                case Key.Escape:
-                    PauseEvent?.Invoke();
-                    break;
-                case Key.Left:
-                case Key.A:
+                Check = true;
+                ClearShape();
+                var collision = Collision.None;
+                switch (e.Key)
                 {
-                    for (var i = 0; i < 4; i++)
+                    case Key.Escape:
+                        PauseEvent?.Invoke();
+                        break;
+                    case Key.Left:
+                    case Key.A:
                     {
-                        collision = CheckCollision(_Shape[i, 0], _Shape[i, 1], Direction.Left);
-                        if (collision != Collision.None) break;
+                        for (var i = 0; i < 4; i++)
+                        {
+                            collision = CheckCollision(_Shape[i, 0], _Shape[i, 1], Direction.Left);
+                            if (collision != Collision.None) break;
+                        }
+
+                        if (collision == Collision.None)
+                            MoveShape(Direction.Left);
+                    }
+                        break;
+                    case Key.Right:
+                    case Key.D:
+                    {
+                        for (var i = 0; i < 4; i++)
+                        {
+                            collision = CheckCollision(_Shape[i, 0], _Shape[i, 1], Direction.Right);
+                            if (collision != Collision.None) break;
+                        }
+
+                        if (collision == Collision.None)
+                            MoveShape(Direction.Right);
+                    }
+                        break;
+                    case Key.Down:
+                    case Key.S:
+                    {
+                        for (var i = 0; i < 4; i++)
+                        {
+                            collision = CheckCollision(_Shape[i, 0], _Shape[i, 1], Direction.Down);
+                            if (collision != Collision.None) break;
+                        }
+
+                        if (collision == Collision.None)
+                        {
+                            DownTimer.Stop();
+                            MoveShape(Direction.Down);
+                            DownTimer.Start();
+                        }
+
+                        break;
                     }
 
-                    if (collision == Collision.None)
-                        MoveShape(Direction.Left);
+                    case Key.Up:
+                    case Key.W:
+                        Rotate();
+                        break;
                 }
-                    break;
-                case Key.Right:
-                case Key.D:
-                {
-                    for (var i = 0; i < 4; i++)
-                    {
-                        collision = CheckCollision(_Shape[i, 0], _Shape[i, 1], Direction.Right);
-                        if (collision != Collision.None) break;
-                    }
-
-                    if (collision == Collision.None)
-                        MoveShape(Direction.Right);
-                }
-                    break;
-                case Key.Down:
-                case Key.S:
-                {
-                    for (var i = 0; i < 4; i++)
-                    {
-                        collision = CheckCollision(_Shape[i, 0], _Shape[i, 1], Direction.Down);
-                        if (collision != Collision.None) break;
-                    }
-
-                    if (collision == Collision.None)
-                    {
-                        DownTimer.Stop();
-                        MoveShape(Direction.Down);
-                        DownTimer.Start();
-                    }
-
-                    break;
-                }
-
-                case Key.Up:
-                case Key.W:
-                    Rotate();
-                    break;
+            }
+            catch (Exception EX)
+            {
+                Debug.WriteLine("KEY EXCEPTION {0}", EX);
             }
 
             Check = false;
@@ -352,7 +360,7 @@ namespace WpfTetris.Logic
             DownTimer = new Timer();
             TimeTimer.Interval = 1000;
             DownTimer.Interval = downElapsed;
-            DrawTimer.Interval = 20;
+            DrawTimer.Interval = 30;
         }
 
         public void StartTimers()
@@ -564,39 +572,51 @@ namespace WpfTetris.Logic
 
         private void Rotate()
         {
-            var collision = Collision.None;
-            int maxx = 0, maxy = 0;
-            for (var i = 0; i < 4; i++)
+            try
             {
-                if (_Shape[i, 0] > maxy) maxy = _Shape[i, 0];
-                if (_Shape[i, 1] > maxx) maxx = _Shape[i, 1];
-            }
+                var collision = Collision.None;
+                int maxx = 0, maxy = 0;
+                for (var i = 0; i < 4; i++)
+                {
+                    if (_Shape[i, 0] > maxy) maxy = _Shape[i, 0];
+                    if (_Shape[i, 1] > maxx) maxx = _Shape[i, 1];
+                }
 
-            for (var i = 0; i < 4; i++)
-            {
-                var temp = _Shape[i, 0];
-                var x = maxy - (maxx - _Shape[i, 1]) + 1;
-                var y = maxx - (4 - (maxy - temp)) + 1;
-                if (x < 0 || y < 0) return;
-                collision = CheckCollision(x, y, Direction.Left);
-                if (collision != Collision.None)
-                    break;
-                collision = CheckCollision(x, y, Direction.Down);
-                if (collision != Collision.None) break;
-            }
-
-            if (collision == Collision.None)
-            {
                 for (var i = 0; i < 4; i++)
                 {
                     var temp = _Shape[i, 0];
-                    var x = maxy - (maxx - _Shape[i, 1]);
+                    var x = maxy - (maxx - _Shape[i, 1]) + 1;
                     var y = maxx - (4 - (maxy - temp)) + 1;
-                    _Shape[i, 0] = x;
-                    _Shape[i, 1] = y;
+                    if (x < 0 || y < 0) return;
+                    collision = CheckCollision(x, y, Direction.Left);
+                    if (collision != Collision.None)
+                        break;
+
+                    collision = CheckCollision(x - 1, y, Direction.Right);
+                    if (collision != Collision.None)
+                        x = x - 1;
+                    collision = CheckCollision(x, y, Direction.Down);
+                    if (collision != Collision.None) break;
                 }
 
-                MoveShape(Direction.Down);
+
+                if (collision == Collision.None)
+                {
+                    for (var i = 0; i < 4; i++)
+                    {
+                        var temp = _Shape[i, 0];
+                        var x = maxy - (maxx - _Shape[i, 1]);
+                        var y = maxx - (4 - (maxy - temp)) + 1;
+                        _Shape[i, 0] = x;
+                        _Shape[i, 1] = y;
+                    }
+
+                    MoveShape(Direction.Down);
+                }
+            }
+            catch (Exception EX)
+            {
+                Debug.WriteLine("RotateException");
             }
         }
 
@@ -609,6 +629,7 @@ namespace WpfTetris.Logic
             }
             catch (Exception EX)
             {
+                Debug.WriteLine("Clear shape Ex");
             }
         }
 
@@ -617,19 +638,20 @@ namespace WpfTetris.Logic
         {
             switch (direction)
             {
-                case Direction.Left: return x - 1 == -1;
-                case Direction.Right: return x + 1 == FieldWidth;
-                case Direction.Down: return y + 1 == FieldHeight;
+                case Direction.Left: return x - 1 <= -1;
+                case Direction.Right: return x + 1 >= FieldWidth;
+                case Direction.Down: return y + 1 >= FieldHeight;
             }
+
 
             return false;
         }
 
         private Collision CheckCollision(int x, int y, Direction direction)
         {
-            if (CheckCollisionBounds(x, y, direction)) return Collision.Border;
             try
             {
+                if (CheckCollisionBounds(x, y, direction)) return Collision.Border;
                 switch (direction)
                 {
                     case Direction.Right:
@@ -649,8 +671,9 @@ namespace WpfTetris.Logic
                         break;
                 }
             }
-            catch (Exception ex)
+            catch (IndexOutOfRangeException ex)
             {
+                return Collision.Border;
             }
 
             return Collision.None;
@@ -664,6 +687,7 @@ namespace WpfTetris.Logic
             }
             catch (Exception EX)
             {
+                Debug.WriteLine("Draw Timer Exception");
             }
         }
 
@@ -676,43 +700,50 @@ namespace WpfTetris.Logic
         {
             if (!Check)
             {
-                Check = true;
-                if (NextShape == null) NextShape = RandomShape();
-
-                if (Settings.ShadowShow)
-                    ShadowCalculatePosition();
-
-                Collision? collision = Collision.None;
-                for (var i = 0; i < 4; i++)
+                try
                 {
-                    collision = CheckCollision(_Shape[i, 0], _Shape[i, 1], Direction.Down);
-                    if (collision != Collision.None) break;
-                }
+                    Check = true;
+                    if (NextShape == null) NextShape = RandomShape();
 
-                if (collision == Collision.None)
-                {
-                    ClearShape();
-                    MoveShape(Direction.Down);
-                }
-                else
-                {
-                    ShapeFreeze();
-                    RemoveLines();
+                    if (Settings.ShadowShow)
+                        ShadowCalculatePosition();
 
-                    _color = GameColors.GetRandomColorIndex();
-                    _Shape = NextShape;
-                    NextShape = null;
+                    Collision? collision = Collision.None;
                     for (var i = 0; i < 4; i++)
                     {
                         collision = CheckCollision(_Shape[i, 0], _Shape[i, 1], Direction.Down);
                         if (collision != Collision.None) break;
                     }
 
-                    if (collision != Collision.None)
+                    if (collision == Collision.None)
                     {
-                        EndGame();
-                        return;
+                        ClearShape();
+                        MoveShape(Direction.Down);
                     }
+                    else
+                    {
+                        ShapeFreeze();
+                        RemoveLines();
+
+                        _color = GameColors.GetRandomColorIndex();
+                        _Shape = NextShape;
+                        NextShape = null;
+                        for (var i = 0; i < 4; i++)
+                        {
+                            collision = CheckCollision(_Shape[i, 0], _Shape[i, 1], Direction.Down);
+                            if (collision != Collision.None) break;
+                        }
+
+                        if (collision != Collision.None)
+                        {
+                            EndGame();
+                            return;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Down Timer EX: {0} ", ex);
                 }
 
                 Check = false;

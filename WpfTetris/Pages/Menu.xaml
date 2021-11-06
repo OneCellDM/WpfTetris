@@ -22,7 +22,7 @@
             <TextBlock HorizontalAlignment="Center" Text="TETRIS" Margin="0,10,0,10" FontSize="60"
                        FontFamily="../Resources/#Tetris Block" Foreground="Black" />
         </StackPanel>
-        <StackPanel x:Name="AccountPanel" Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0"
+        <StackPanel x:Name="AccountPanel" Grid.Row="1" HorizontalAlignment="Center" Margin="0,1,0,0"
                     Orientation="Horizontal">
             <StackPanel.Background>
                 <SolidColorBrush Color="Black" Opacity="0.00" />
@@ -39,7 +39,7 @@
                        x:Name="NickNameText" />
 
         </StackPanel>
-        <Border Grid.Row="2" VerticalAlignment="Top" Margin="0,20,0,0" HorizontalAlignment="Center" BorderThickness="5">
+        <Border Grid.Row="2" VerticalAlignment="Top" Margin="0,10,0,0" HorizontalAlignment="Center" BorderThickness="5">
 
             <Border.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

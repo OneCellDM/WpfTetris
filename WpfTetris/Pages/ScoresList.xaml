@@ -87,8 +87,14 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <TextBlock Margin="0,0,0,0" Text="{Binding Name}" />
-                        <TextBlock Margin="20,0,0,0" Visibility="Visible" Grid.Column="1" Text="{Binding Score}" />
+                        <TextBlock x:Name="ScoreText" Margin="20,0,0,0" Visibility="Visible" Grid.Column="1"
+                                   Text="{Binding Score}" />
                     </Grid>
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Score}" Value="-1">
+                            <Setter TargetName="ScoreText" Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
                 </DataTemplate>
 
             </ListView.ItemTemplate>

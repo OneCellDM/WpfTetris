@@ -28,6 +28,7 @@ namespace WpfTetris.Pages
 
         public async void Load()
         {
+            var c = 0;
             try
             {
                 ScoresListview.Items.Add(new ScoreInfo
@@ -46,30 +47,41 @@ namespace WpfTetris.Pages
                         });
                     }, DispatcherPriority.Background);
 
+
+                ScoresListview.Items.Add(new ScoreInfo
+                {
+                    Name = "Загрузка...",
+                    Score = -1
+                });
+                c = ScoresListview.Items.Count - 1;
+
                 var res = (await MysqlManager.Instance.GetScores()).OrderByDescending(x => x.score);
+                ScoresListview.Items.RemoveAt(c);
                 ScoresListview.Items.Add(new ScoreInfo
                 {
                     Name = "Счет всех игроков. Количество игроков:",
                     Score = res.Count()
                 });
-                if (res?.Count() == 0)
-                {
-                }
-                else
-                {
-                    foreach (var item in res)
-                        Dispatcher.Invoke(() =>
+
+
+                foreach (var item in res)
+                    Dispatcher.Invoke(() =>
+                    {
+                        ScoresListview.Items.Add(new ScoreInfo
                         {
-                            ScoresListview.Items.Add(new ScoreInfo
-                            {
-                                Name = string.IsNullOrEmpty(item.name) ? "Неизвестный" : item.name,
-                                Score = item.score
-                            });
-                        }, DispatcherPriority.Background);
-                }
+                            Name = string.IsNullOrEmpty(item.name) ? "Неизвестный" : item.name,
+                            Score = item.score
+                        });
+                    }, DispatcherPriority.Background);
             }
             catch (Exception)
             {
+                ScoresListview.Items.RemoveAt(c);
+                ScoresListview.Items.Add(new ScoreInfo
+                {
+                    Name = "Ошибка соединения с базой данных",
+                    Score = -1
+                });
             }
         }
 
