@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Timers;
 using System.Windows;
@@ -13,24 +12,22 @@ using WpfTetris.Enums;
 using WpfTetris.Models;
 using WpfTetris.Pages;
 using WpfTetris.Utils;
-using Menu = WpfTetris.Pages.Menu;
 
 namespace WpfTetris.Logic
 {
     public class GameLogic : IDisposable
     {
-        public delegate void PauseDelegate();
+        public delegate void EventsDelegate();
 
-        public event PauseDelegate PauseEvent;
-        private bool Exit = false;
         private const int Scale = 15;
         public const int FieldWidth = 10;
         public const int FieldHeight = 25;
-        private int currentScore = 0;
 
         private static int[,] _Field = new int[FieldWidth, FieldHeight];
         private static int[,] _Shape = new int[4, 2];
-        private static int[,] _ShapeShadow = new int[4, 2];
+
+        private static readonly int[,] _ShapeShadow = new int[4, 2];
+
         private static int[,] _NextShape;
 
         private readonly Dictionary<int, int> _GameScores = new Dictionary<int, int>
@@ -42,14 +39,18 @@ namespace WpfTetris.Logic
         private readonly bool Isvideo;
         private readonly Random random;
         private MediaPlayer _AudioPlayer;
+        private int _color;
+        public Level _Gamelevel;
         private int _Level = 1;
         private int _Line;
         private int _Score;
         private int _Time;
-        private int _color;
         private bool Check;
+        private int currentScore;
         private Timer DownTimer;
         private Timer DrawTimer;
+
+        public Game Game;
         private Timer TimeTimer;
 
 
@@ -155,22 +156,19 @@ namespace WpfTetris.Logic
             }
         }
 
-        public Game Game;
-        public Level _Gamelevel;
-        public Menu Menu { get; set; }
-        public Lose LoseWindow { get; set; }
+        public void Dispose()
+        {
+            Game.DrawCanvas.Children.Clear();
+            GC.Collect();
+        }
 
+        public event EventsDelegate PauseEvent;
+        public event EventsDelegate EndGameEvent;
 
         private void AddScore(int removeCount)
         {
             Score += _GameScores[removeCount];
             currentScore += _GameScores[removeCount];
-        }
-
-        public void Dispose()
-        {
-            Game.DrawCanvas.Children.Clear();
-            GC.Collect();
         }
 
         public void MoveShape(Direction direction)
@@ -247,7 +245,12 @@ namespace WpfTetris.Logic
                     }
 
                     if (collision == Collision.None)
+                    {
+                        DownTimer.Stop();
                         MoveShape(Direction.Down);
+                        DownTimer.Start();
+                    }
+
                     break;
                 }
 
@@ -327,22 +330,18 @@ namespace WpfTetris.Logic
             StopGame();
             Game.Dispatcher.Invoke(() =>
             {
-                LoseWindow.Visibility = Visibility.Visible;
-                Game.Visibility = Visibility.Collapsed;
-              
-                LoseWindow.ExitToMenu.Click += ExitToMenu_Click;
-
+                EndGameEvent?.Invoke();
                 SaveScore();
             });
         }
 
         private void LoseVideoElement_MediaOpened(object sender, RoutedEventArgs e)
         {
-           
         }
+
         public void SetVolume(double volume)
         {
-            if(_AudioPlayer!=null)
+            if (_AudioPlayer != null)
                 _AudioPlayer.Volume = volume;
         }
 
@@ -403,10 +402,12 @@ namespace WpfTetris.Logic
                 }
         }
 
-        private void RemoveLines()
+
+        private bool RemoveLines()
         {
             var removeCount = 0;
             var removeLineMaxIndex = -1;
+
             for (var y = FieldHeight - 1; y >= 0; y--)
                 if (CheckLineToRemove(y))
                 {
@@ -439,7 +440,10 @@ namespace WpfTetris.Logic
                 }
 
                 RemoveLines();
+                return true;
             }
+
+            return false;
         }
 
         public void RemoveLine(int line)
@@ -591,6 +595,7 @@ namespace WpfTetris.Logic
                     _Shape[i, 0] = x;
                     _Shape[i, 1] = y;
                 }
+
                 MoveShape(Direction.Down);
             }
         }
@@ -693,6 +698,7 @@ namespace WpfTetris.Logic
                 {
                     ShapeFreeze();
                     RemoveLines();
+
                     _color = GameColors.GetRandomColorIndex();
                     _Shape = NextShape;
                     NextShape = null;
@@ -713,20 +719,6 @@ namespace WpfTetris.Logic
             }
         }
 
-        //TODO: перенести этот метод в MainWindow
-        private void ExitToMenu_Click(object sender, RoutedEventArgs e)
-        {
-            Game.Dispatcher.Invoke(() =>
-            {
-                Exit = true;
-             
-                Menu.Visibility = Visibility.Visible;
-                Game.Visibility = Visibility.Collapsed;
-                LoseWindow.Visibility = Visibility.Collapsed;
-                LoseWindow.ExitToMenu.Click -= ExitToMenu_Click;
-                Exit = false;
-            });
-        }
 
         private void VideoElement_MediaEnded(object sender, RoutedEventArgs e)
         {
@@ -755,7 +747,6 @@ namespace WpfTetris.Logic
                     }
                     else
                     {
-                       
                         var max = PlayerManager.CurrentPlayer.GetMaxScore();
 
                         var id = await MysqlManager.Instance.GetIdFromNameAndGuid(session, nick);
@@ -780,7 +771,6 @@ namespace WpfTetris.Logic
         public void Deactivated(object sender, EventArgs e)
         {
             PauseGame();
-            
         }
     }
 }

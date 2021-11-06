@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Shapes;
 using WpfTetris.Interfaces;
 
@@ -7,7 +8,7 @@ namespace WpfTetris.Pages
     public partial class GameSettings : UserControl, ICloseControl
     {
         private string oldText = "3000";
-        
+
 
         public GameSettings()
         {
@@ -23,19 +24,18 @@ namespace WpfTetris.Pages
             DownDelayChangeSlider.Value = Settings.DelayChange;
             VolumeSlider.Value = Settings.AudioVolume;
 
-            
 
             ScoreTextbox.Text = oldText;
         }
 
         public event CloseControl CloseEvent;
 
-        private void CloseButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             CloseEvent?.Invoke();
         }
 
-        private void SaveButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             Settings.AudioVolume = VolumeSlider.Value;
             Settings.StartDownDelay = StartDownDelaySlider.Value;
@@ -66,18 +66,18 @@ namespace WpfTetris.Pages
             }
         }
 
-        private void ShowShadowCheckbox_Checked(object sender, System.Windows.RoutedEventArgs e)
+        private void ShowShadowCheckbox_Checked(object sender, RoutedEventArgs e)
         {
-            ColorPanel.Visibility = System.Windows.Visibility.Visible;
+            ColorPanel.Visibility = Visibility.Visible;
         }
 
 
-        private void ShowShadowCheckbox_Unchecked(object sender, System.Windows.RoutedEventArgs e)
+        private void ShowShadowCheckbox_Unchecked(object sender, RoutedEventArgs e)
         {
-            ColorPanel.Visibility = System.Windows.Visibility.Collapsed;
+            ColorPanel.Visibility = Visibility.Collapsed;
         }
 
-        private void StartDownDelaySlider_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
+        private void StartDownDelaySlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             EndDownDelaySlider.Maximum = e.NewValue;
         }

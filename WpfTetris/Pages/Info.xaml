@@ -3,56 +3,55 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:WpfTetris.Pages"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300" Foreground="Black">
-    <Grid >
+    <Grid>
         <Grid.Background>
-            <SolidColorBrush Color="Black" Opacity="0.06"></SolidColorBrush>
+            <SolidColorBrush Color="Black" Opacity="0.06" />
         </Grid.Background>
-        <Grid.RowDefinitions>
-        
-        </Grid.RowDefinitions>
+
         <ScrollViewer>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel.Resources>
                     <Style TargetType="TextBlock">
-                        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-                        <Setter Property="FontSize" Value="25"/>
-                        <Setter Property="Margin" Value="10"/>
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                        <Setter Property="FontSize" Value="25" />
+                        <Setter Property="Margin" Value="10" />
                     </Style>
                 </StackPanel.Resources>
-                <Image Width="500"  Stretch="Uniform" Source="/WpfTetris;component/Resources/Images/spedwagon.png"></Image>
+                <Image Width="500" Stretch="Uniform" Source="/WpfTetris;component/Resources/Images/spedwagon.png" />
 
-                <TextBlock Text="Разработка" FontSize="30"></TextBlock>
-               
+                <TextBlock Text="Разработка" FontSize="30" />
 
-                <TextBlock Text="Язык: C#"/>
+
+                <TextBlock Text="Язык: C#" />
                 <TextBlock>
-                    <Run Text="Графический Framework:"/>
-                    <Hyperlink x:Name="WpfLink" Click="WpfLink_Click" NavigateUri="https://docs.microsoft.com/ru-ru/dotnet/desktop/wpf/introduction-to-wpf?view=netframeworkdesktop-4.8">
+                    <Run Text="Графический Framework:" />
+                    <Hyperlink x:Name="WpfLink" Click="WpfLink_Click"
+                               NavigateUri="https://docs.microsoft.com/ru-ru/dotnet/desktop/wpf/introduction-to-wpf?view=netframeworkdesktop-4.8">
                         WPF
                     </Hyperlink>
                 </TextBlock>
 
 
                 <TextBlock>
-                    <Run Text="Сайт"  FontSize="30" />
-                    <LineBreak/>
+                    <Run Text="Сайт" FontSize="30" />
+                    <LineBreak />
                     <Hyperlink />
                 </TextBlock>
-                
-                <TextBlock  Text="Создатели игры"  FontSize="30"/>
-                <TextBlock Text="Разработчик игры: Мурзак Даниил"/>
-                <TextBlock Text="Project Manager: Сафонов Андрей" ></TextBlock>
-                <TextBlock Text="Дизайнер игры: Сафонов Андрей"/>
-                <TextBlock Text="Тестеры игры: Попов Максим и Михайлов Даниил"/>
 
-                <Button x:Name="CloseButton" Style="{DynamicResource ButtonStyle}" Foreground="Black" Grid.Row="2" Margin="0,0,0,20" Padding="12" Width="500"
-                HorizontalAlignment="Center" FontSize="25" Background="Transparent" Content="Выйти" 
-                Click="CloseButton_Click" />
+                <TextBlock Text="Создатели игры" FontSize="30" />
+                <TextBlock Text="Разработчик игры: Мурзак Даниил" />
+                <TextBlock Text="Project Manager: Сафонов Андрей" />
+                <TextBlock Text="Дизайнер игры: Сафонов Андрей" />
+                <TextBlock Text="Тестеры игры: Попов Максим и Михайлов Даниил" />
+
+                <Button x:Name="CloseButton" Style="{DynamicResource ButtonStyle}" Foreground="Black"
+                        Margin="0,0,0,20" Padding="12" Width="500"
+                        HorizontalAlignment="Center" FontSize="25" Background="Transparent" Content="Выйти"
+                        Click="CloseButton_Click" />
             </StackPanel>
         </ScrollViewer>
-        
+
     </Grid>
 </UserControl>

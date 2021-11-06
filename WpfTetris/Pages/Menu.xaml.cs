@@ -19,9 +19,10 @@ namespace WpfTetris.Pages
 
         public delegate void SetGame(Level level);
 
-        public Dictionary<string, Level> DictionaryLevels = new Dictionary<string, Level>()
+        public Dictionary<string, Level> DictionaryLevels = new Dictionary<string, Level>
         {
-            {"Acapella", new Level
+            {
+                "Acapella", new Level
                 {
                     BackgroundType = BackgroundType.Video,
                     Background = @"Backgrounds/AcapellaAndBass1.mp4",
@@ -29,107 +30,112 @@ namespace WpfTetris.Pages
                     Audio = @"Audios/Acapella.mp3"
                 }
             },
-            {"Bass1",new Level
             {
-                BackgroundType = BackgroundType.Video,
-                Background = @"Backgrounds/AcapellaAndBass1.mp4",
-                IsAudio = true,
-                Audio = @"Audios/Bass1.mp3"
-            }
-            },
-            {"Bass2",new Level
-            {
-                BackgroundType = BackgroundType.Video,
-                Background = @"Backgrounds/Bass2.mp4",
-                IsAudio = true,
-                Audio = @"Audios/Bass2.mp3"
-            }
-            },
-            {"Egypt",new Level
-            {
-                BackgroundType = BackgroundType.Image,
-                Background = @"Backgrounds/Egypt.jpg",
-                IsAudio = true,
-                Audio = @"Audios/Egypt.mp3"
-            }
-            },
-            {"Bit",new Level
-            {
-                BackgroundType = BackgroundType.Video,
-                Background = @"Backgrounds/bit.mp4",
-                IsAudio = true,
-                Audio = @"Audios/bit.mp3",
-                Colors = new[]
+                "Bass1", new Level
                 {
-                    Brushes.Pink,
-                    Brushes.DeepPink,
-                    Brushes.Yellow,
-                    Brushes.AliceBlue,
-                    Brushes.HotPink,
-                    Brushes.LightBlue
+                    BackgroundType = BackgroundType.Video,
+                    Background = @"Backgrounds/AcapellaAndBass1.mp4",
+                    IsAudio = true,
+                    Audio = @"Audios/Bass1.mp3"
+                }
+            },
+            {
+                "Bass2", new Level
+                {
+                    BackgroundType = BackgroundType.Video,
+                    Background = @"Backgrounds/Bass2.mp4",
+                    IsAudio = true,
+                    Audio = @"Audios/Bass2.mp3"
+                }
+            },
+            {
+                "Egypt", new Level
+                {
+                    BackgroundType = BackgroundType.Image,
+                    Background = @"Backgrounds/Egypt.jpg",
+                    IsAudio = true,
+                    Audio = @"Audios/Egypt.mp3"
+                }
+            },
+            {
+                "Bit", new Level
+                {
+                    BackgroundType = BackgroundType.Video,
+                    Background = @"Backgrounds/bit.mp4",
+                    IsAudio = true,
+                    Audio = @"Audios/bit.mp3",
+                    Colors = new[]
+                    {
+                        Brushes.Pink,
+                        Brushes.DeepPink,
+                        Brushes.Yellow,
+                        Brushes.AliceBlue,
+                        Brushes.HotPink,
+                        Brushes.LightBlue
+                    }
+                }
+            },
+            {
+                "SSSR", new Level
+                {
+                    BackgroundType = BackgroundType.Image,
+                    Background = @"Backgrounds/SSSR.jpg",
+                    IsAudio = true,
+                    Audio = @"Audios/SSSR.mp3",
+                    Colors = new[]
+                    {
+                        Brushes.White,
+                        Brushes.Red
+                    }
+                }
+            },
+            {
+                "Ru", new Level
+                {
+                    BackgroundType = BackgroundType.Image,
+                    Background = @"Backgrounds/Ru.jpg",
+                    IsAudio = true,
+                    Audio = @"Audios/Ru.mp3",
+                    Colors = new[]
+                    {
+                        Brushes.White,
+                        Brushes.Blue,
+                        Brushes.Red
+                    }
+                }
+            },
+            {
+                "Helloween", new Level
+                {
+                    BackgroundType = BackgroundType.Image,
+                    Background = @"Backgrounds/Helloween.jpg",
+                    IsAudio = true,
+                    Audio = @"Audios/Helloween.mp3",
+                    Colors = new[]
+                    {
+                        Brushes.Orange,
+                        Brushes.OrangeRed,
+                        Brushes.DarkOrange,
+                        Brushes.DarkRed
+                    }
+                }
+            },
+            {
+                "NewYear", new Level
+                {
+                    BackgroundType = BackgroundType.Image,
+                    Background = @"Backgrounds/NewYear.jpg",
+                    IsAudio = true,
+                    Audio = @"Audios/NewYear.mp3",
+                    Colors = new[]
+                    {
+                        Brushes.Salmon,
+                        Brushes.Yellow,
+                        Brushes.Red,
+                        Brushes.White
+                    }
                 }
             }
-            },
-            {"SSSR",new Level
-            {
-                BackgroundType = BackgroundType.Image,
-                Background = @"Backgrounds/SSSR.jpg",
-                IsAudio = true,
-                Audio = @"Audios/SSSR.mp3",
-                Colors = new[]
-                {
-                    Brushes.White,
-                    Brushes.Red
-                }
-            }
-            },
-            {"Ru",new Level
-            {
-                BackgroundType = BackgroundType.Image,
-                Background = @"Backgrounds/Ru.jpg",
-                IsAudio = true,
-                Audio = @"Audios/Ru.mp3",
-                Colors = new[]
-                {
-                    Brushes.White,
-                    Brushes.Blue,
-                    Brushes.Red
-                }
-            }
-            },
-            {"Helloween",new Level
-            {
-                BackgroundType = BackgroundType.Image,
-                Background = @"Backgrounds/Helloween.jpg",
-                IsAudio = true,
-                Audio = @"Audios/Helloween.mp3",
-                Colors = new[]
-                {
-                    Brushes.Orange,
-                    Brushes.OrangeRed,
-                    Brushes.DarkOrange,
-                    Brushes.DarkRed
-                }
-            }
-            },
-            {"NewYear",new Level
-            {
-                BackgroundType = BackgroundType.Image,
-                Background = @"Backgrounds/NewYear.jpg",
-                IsAudio = true,
-                Audio = @"Audios/NewYear.mp3",
-                Colors = new[]
-                {
-                    Brushes.Salmon,
-                    Brushes.Yellow,
-                    Brushes.Red,
-                    Brushes.White
-                }
-            }
-            }
-
-
-
         };
 
         public Menu()
@@ -155,11 +161,11 @@ namespace WpfTetris.Pages
             });
         }
 
-        private void AcapellaGame(object sender, RoutedEventArgs e)=>
-        
+        private void AcapellaGame(object sender, RoutedEventArgs e)
+        {
             SetGameEvent.Invoke(DictionaryLevels["Acapella"]);
-            
-        
+        }
+
 
         private void Bass1Game(object sender, RoutedEventArgs e)
         {
@@ -174,31 +180,26 @@ namespace WpfTetris.Pages
         private void EgyptGame(object sender, RoutedEventArgs e)
         {
             SetGameEvent.Invoke(DictionaryLevels["Egypt"]);
-            
         }
 
         private void BitGame(object sender, RoutedEventArgs e)
         {
             SetGameEvent.Invoke(DictionaryLevels["Bit"]);
-            
         }
 
         private void SSSRGame(object sender, RoutedEventArgs e)
         {
             SetGameEvent.Invoke(DictionaryLevels["SSSR"]);
-            
         }
 
         private void RuGame(object sender, RoutedEventArgs e)
         {
             SetGameEvent.Invoke(DictionaryLevels["Ru"]);
-            
         }
 
         private void HelloweenGame(object sender, RoutedEventArgs e)
         {
             SetGameEvent.Invoke(DictionaryLevels["Helloween"]);
-            
         }
 
         private void NewYearGame(object sender, RoutedEventArgs e)
@@ -241,7 +242,6 @@ namespace WpfTetris.Pages
 
         private void RandomTematicGame(object sender, RoutedEventArgs e)
         {
-            
             SetGameEvent.Invoke(DictionaryLevels.ElementAt(new Random().Next(0, DictionaryLevels.Count)).Value);
         }
 
@@ -252,7 +252,6 @@ namespace WpfTetris.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void InfoButton_Click(object sender, RoutedEventArgs e)

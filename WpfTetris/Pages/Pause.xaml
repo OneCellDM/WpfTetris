@@ -10,40 +10,6 @@
              d:DesignHeight="450" d:DesignWidth="800" Foreground="white">
     <UserControl.Resources>
         <app:VolumeSliderConverter x:Key="VolumeSliderConverter" />
-        <Style x:Key="FocusVisual">
-            <Setter Property="Control.Template">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <Rectangle Margin="2" SnapsToDevicePixels="true"
-                                   Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
-                                   StrokeThickness="1" StrokeDashArray="1 2" />
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <SolidColorBrush x:Key="OptionMark.Static.Background" Color="#FFFFFFFF" />
-        <SolidColorBrush x:Key="OptionMark.Static.Border" Color="#FF707070" />
-        <Style x:Key="OptionMarkFocusVisual">
-            <Setter Property="Control.Template">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <Rectangle Margin="14,0,0,0" SnapsToDevicePixels="true"
-                                   Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
-                                   StrokeThickness="1" StrokeDashArray="1 2" />
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <SolidColorBrush x:Key="OptionMark.MouseOver.Background" Color="#FFF3F9FF" />
-        <SolidColorBrush x:Key="OptionMark.MouseOver.Border" Color="#FF5593FF" />
-        <SolidColorBrush x:Key="OptionMark.MouseOver.Glyph" Color="#FF212121" />
-        <SolidColorBrush x:Key="OptionMark.Disabled.Background" Color="#FFE6E6E6" />
-        <SolidColorBrush x:Key="OptionMark.Disabled.Border" Color="#FFBCBCBC" />
-        <SolidColorBrush x:Key="OptionMark.Disabled.Glyph" Color="#FF707070" />
-        <SolidColorBrush x:Key="OptionMark.Pressed.Background" Color="#FFD9ECFF" />
-        <SolidColorBrush x:Key="OptionMark.Pressed.Border" Color="#FF3C77DD" />
-        <SolidColorBrush x:Key="OptionMark.Pressed.Glyph" Color="#FF212121" />
-        <SolidColorBrush x:Key="OptionMark.Static.Glyph" Color="#FF212121" />
         <SolidColorBrush x:Key="SliderThumb.Static.Foreground" Color="#FFE5E5E5" />
         <SolidColorBrush x:Key="SliderThumb.MouseOver.Background" Color="#FFDCECFC" />
         <SolidColorBrush x:Key="SliderThumb.MouseOver.Border" Color="#FF7Eb4EA" />
@@ -361,11 +327,11 @@
             </StackPanel.Background>
 
             <StackPanel.Resources>
-                <Style TargetType="Button"  BasedOn="{StaticResource ButtonStyle}">
+                <Style TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
                     <Setter Property="Margin" Value="20" />
                     <Setter Property="Foreground" Value="White" />
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="BorderThickness" Value="2"/>
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderThickness" Value="2" />
                 </Style>
             </StackPanel.Resources>
             <TextBlock Margin="20" Text="Пауза" HorizontalAlignment="Center" FontSize="30" />
@@ -377,35 +343,36 @@
             </TextBlock>
             <Slider Margin="20,10,20,10" x:Name="VolumeSlider" Maximum="1" LargeChange="0.1" />
 
-            
-            <Button x:Name="BackToGameButton" 
+
+            <Button x:Name="BackToGameButton"
                     BorderBrush="Black"
-                 
+
                     Visibility="Visible"
                     Padding="0"
                     Width="202" Height="58" Content="Продолжить"
                     ui:UIAttachedProperty.SplitToRectanglesScale="20"
                     Click="BackToGameButton_Click" />
 
-            <Button x:Name="HelpButton" 
+            <Button x:Name="HelpButton"
                     BorderBrush="Black"
-                   
+
                     Visibility="Visible"
                     Padding="0"
                     Width="202" Height="58" Content="Помощь"
                     ui:UIAttachedProperty.SplitToRectanglesScale="20"
-                     Click="HelpButton_Click" />
+                    Click="HelpButton_Click" />
 
 
-            <Button x:Name="ExitButton" 
+            <Button x:Name="ExitButton"
                     BorderBrush="Black"
-                  
+
                     Visibility="Visible"
                     Padding="0"
                     Width="202" Height="58" Content="Выйти"
                     ui:UIAttachedProperty.SplitToRectanglesScale="20"
-                     Click="ExitButton_Click" />
-            <TextBlock HorizontalAlignment="Center" Text="При выходе из игры,  рекорд не будет сохранен." Margin="0,0,0,20"></TextBlock>
+                    Click="ExitButton_Click" />
+            <TextBlock HorizontalAlignment="Center" Text="При выходе из игры,  рекорд не будет сохранен."
+                       Margin="0,0,0,20" />
         </StackPanel>
     </Grid>
 </UserControl>

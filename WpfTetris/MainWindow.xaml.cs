@@ -9,8 +9,6 @@ namespace WpfTetris
 {
     public partial class MainWindow : Window
     {
-        private bool Started = false;
-
         public MainWindow()
         {
             InitializeComponent();
@@ -39,6 +37,7 @@ namespace WpfTetris
 
             HelpPage.CloseEvent += HelpPage_CloseEvent;
 
+            LosePage.CloseEvent += LosePage_CloseEvent;
             MenuPage.OpenHelpEvent += MenuPage_OpenHelpEvent;
             MenuPage.OpenSettingsEvent += MenuPage_OpenSettingsEvent;
             MenuPage.OpenCreateYouGameEvent += MenuPage_OpenCreateYouGameEvent;
@@ -53,6 +52,17 @@ namespace WpfTetris
             MenuPage.NickNameText.Text = PlayerManager.CurrentPlayer.NickName;
 
             OpenPage(MenuPage);
+        }
+
+        public GameLogic Game { get; set; }
+
+        private void LosePage_CloseEvent()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                OpenPage(MenuPage);
+                UnSubscribeGamesEvent();
+            });
         }
 
         private void HelpPage_CloseEvent()
@@ -82,7 +92,6 @@ namespace WpfTetris
                 Game.ResumeGame();
                 PausePage.VolumeSlider.ValueChanged -= VolumeSlider_ValueChanged;
                 OpenPage(GamePage);
-               
             }
         }
 
@@ -97,7 +106,7 @@ namespace WpfTetris
                 Game.StopGame();
                 OpenPage(MenuPage);
                 PausePage.VolumeSlider.ValueChanged -= VolumeSlider_ValueChanged;
-                Game.PauseEvent -= Game_PauseEvent;
+                UnSubscribeGamesEvent();
             }
         }
 
@@ -110,8 +119,6 @@ namespace WpfTetris
         {
             OpenPage(SettingsPage);
         }
-
-        public GameLogic Game { get; set; }
 
         private void AccountPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -182,9 +189,7 @@ namespace WpfTetris
             GC.Collect(0);
 
             Game = new GameLogic(GamePage, level);
-            Game.PauseEvent += Game_PauseEvent;
-            Game.LoseWindow = LosePage;
-            Game.Menu = MenuPage;
+
 
             GamePage.NickName.Text = PlayerManager.CurrentPlayer.NickName;
             GamePage.AvatarImage.Source = PlayerManager.AvatarSource;
@@ -194,6 +199,7 @@ namespace WpfTetris
             Game.StartGame();
             SubscribeGamesEvent();
         }
+
 
         private void Game_PauseEvent()
         {
@@ -214,6 +220,13 @@ namespace WpfTetris
             Deactivated += Game.Deactivated;
             Activated += Game.Activated;
             KeyDown += Game.KeyDown;
+            Game.PauseEvent += Game_PauseEvent;
+            Game.EndGameEvent += Game_EndGameEvent;
+        }
+
+        private void Game_EndGameEvent()
+        {
+            OpenPage(LosePage);
         }
 
         public void UnSubscribeGamesEvent()
@@ -221,6 +234,8 @@ namespace WpfTetris
             Deactivated -= Game.Deactivated;
             Activated -= Game.Activated;
             KeyDown -= Game.KeyDown;
+            Game.PauseEvent -= Game_PauseEvent;
+            Game.EndGameEvent -= Game_EndGameEvent;
         }
     }
 }

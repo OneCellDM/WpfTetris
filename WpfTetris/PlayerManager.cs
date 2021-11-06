@@ -11,6 +11,7 @@ namespace WpfTetris
     public static class PlayerManager
     {
         public static List<Player> Players = new List<Player>();
+        private static Player _CurrentPlayer;
 
         static PlayerManager()
         {
@@ -19,8 +20,17 @@ namespace WpfTetris
         }
 
         public static Guid SessionUID { get; }
-        private static Player _CurrentPlayer;
-        public static Player CurrentPlayer { get => _CurrentPlayer; set { _CurrentPlayer = value; Players.Add(_CurrentPlayer); } }
+
+        public static Player CurrentPlayer
+        {
+            get => _CurrentPlayer;
+            set
+            {
+                _CurrentPlayer = value;
+                Players.Add(_CurrentPlayer);
+            }
+        }
+
         public static string AvatarPath { get; set; }
 
         public static ImageSource AvatarSource =>

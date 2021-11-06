@@ -6,18 +6,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="500" Background="White">
-   
+
 
     <Grid>
         <Grid.Background>
-            <SolidColorBrush Color="Black" Opacity="0.06"></SolidColorBrush>
+            <SolidColorBrush Color="Black" Opacity="0.06" />
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        
+
         <StackPanel Grid.Row="0">
             <TextBlock HorizontalAlignment="Center" Text="TETRIS" Margin="0,10,0,10" FontSize="60"
                        FontFamily="../Resources/#Tetris Block" Foreground="Black" />
@@ -45,7 +45,7 @@
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0" />
                     <GradientStop Color="Black" Offset="1" />
-                   
+
                 </LinearGradientBrush>
             </Border.BorderBrush>
             <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -56,8 +56,8 @@
                         <Style TargetType="Button" BasedOn="{StaticResource MenuButtonStyle}">
                             <Setter Property="Padding" Value="0,0" />
                             <Setter Property="Margin" Value="16" />
-                            <Setter Property="Width" Value="400"/>
-                            <Setter Property="Height" Value="50"/>
+                            <Setter Property="Width" Value="400" />
+                            <Setter Property="Height" Value="50" />
                             <Setter Property="BorderThickness" Value="4" />
                             <Setter Property="BorderBrush">
                                 <Setter.Value>
@@ -68,27 +68,29 @@
                     </StackPanel.Resources>
 
 
-                    <StackPanel  x:Name="MainMenu" Visibility="Visible">
-                            
-                   
-                        <Button   IsEnabled="True" Content="Обычная игра" Foreground="White" 
+                    <StackPanel x:Name="MainMenu" Visibility="Visible">
+
+
+                        <Button IsEnabled="True" Content="Обычная игра" Foreground="White"
                                 Background="Blue" ui:UIAttachedProperty.SplitToRectanglesScale="20"
-                                Click="StandartGame"  />
-                        <Button x:Name="TematicMenuButton" Background="Tomato" Foreground="White" Content="Тематическое" 
-                                 ui:UIAttachedProperty.SplitToRectanglesScale="20"
+                                Click="StandartGame" />
+                        <Button x:Name="TematicMenuButton" Background="Tomato" Foreground="White"
+                                Content="Тематическое"
+                                ui:UIAttachedProperty.SplitToRectanglesScale="20"
                                 Click="TematicMenuButton_Click" />
-                        <Button x:Name="RecordTable" Foreground="White" Content="Таблица рекордов" Background="LimeGreen"
+                        <Button x:Name="RecordTable" Foreground="White" Content="Таблица рекордов"
+                                Background="LimeGreen"
                                 ui:UIAttachedProperty.SplitToRectanglesScale="20"
                                 Click="RecordTable_Click" />
 
-                        <Button Foreground="White" Content="Настройки" Background="#42aaff" 
+                        <Button Foreground="White" Content="Настройки" Background="#42aaff"
                                 ui:UIAttachedProperty.SplitToRectanglesScale="20"
                                 Click="SettingsButton_Click" />
-                        <Button x:Name="HelpButton" Foreground="White" Content="Помощь" Background="#42aaff" 
+                        <Button x:Name="HelpButton" Foreground="White" Content="Помощь" Background="#42aaff"
                                 ui:UIAttachedProperty.SplitToRectanglesScale="20"
                                 Click="HelpButton_Click" />
-                        
-                        <Button x:Name="InfoButton" Foreground="White" Content="Информация" Background="#42aaff" 
+
+                        <Button x:Name="InfoButton" Foreground="White" Content="Информация" Background="#42aaff"
                                 ui:UIAttachedProperty.SplitToRectanglesScale="20"
                                 Click="InfoButton_Click" />
 
@@ -96,25 +98,22 @@
                                 ui:UIAttachedProperty.SplitToRectanglesScale="20"
                                 Click="ExitButtonClick" />
                     </StackPanel>
-                   
+
                     <WrapPanel Visibility="Collapsed" Orientation="Horizontal" x:Name="TematicMenu">
-                        <Button Visibility="Visible"  x:Name="ExitToMainMenuButton"  Content="Выйти в меню"
-                                Click="ExitToMainMenu_Click" ui:UIAttachedProperty.SplitToRectanglesScale="20"
-                                />
-                        <Button Visibility="Visible"  Content="Случайная тематика"
+                        <Button Visibility="Visible" x:Name="ExitToMainMenuButton" Content="Выйти в меню"
+                                Click="ExitToMainMenu_Click" ui:UIAttachedProperty.SplitToRectanglesScale="20" />
+                        <Button Visibility="Visible" Content="Случайная тематика"
                                 ui:UIAttachedProperty.SplitToRectanglesScale="20"
                                 Click="RandomTematicGame" />
-                        <Button Visibility="Visible"  Content="Создать свою игру"
+                        <Button Visibility="Visible" Content="Создать свою игру"
                                 ui:UIAttachedProperty.SplitToRectanglesScale="20"
                                 Click="CreateYouGameButton_Click" />
                         <Button Background="White" Content="Акапелла" Width="400" Height="60"
                                 HorizontalAlignment="Center" Click="AcapellaGame" />
                         <Button Click="Bass1Game" Foreground="White" Background="DarkRed" Width="400" Height="60"
-                                Content="Басовая Version 1" ui:UIAttachedProperty.SplitToRectanglesScale="20"
-                                />
+                                Content="Басовая Version 1" ui:UIAttachedProperty.SplitToRectanglesScale="20" />
                         <Button Click="Bass2Game" Foreground="White" Background="DarkRed" Width="400" Height="60"
-                                Content="Басовая Version 2" ui:UIAttachedProperty.SplitToRectanglesScale="20"
-                                />
+                                Content="Басовая Version 2" ui:UIAttachedProperty.SplitToRectanglesScale="20" />
                         <Button Width="400" Height="60" Background="Transparent" Foreground="#FFCEA300"
                                 Click="EgyptGame">
 
@@ -127,8 +126,7 @@
                             </Button.Content>
                         </Button>
                         <Button Foreground="White" Background="#42aaff" Width="400" Height="60" Content="8-bit"
-                                Click="BitGame" ui:UIAttachedProperty.SplitToRectanglesScale="20"
-                                />
+                                Click="BitGame" ui:UIAttachedProperty.SplitToRectanglesScale="20" />
                         <Button Background="Transparent" Width="400" Height="60" Click="SSSRGame">
                             <Button.Content>
                                 <StackPanel Orientation="Horizontal">

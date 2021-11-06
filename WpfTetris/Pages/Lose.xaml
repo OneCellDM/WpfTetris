@@ -9,28 +9,27 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid Background="White">
-        <Image Stretch="Fill" gif:ImageBehavior.AnimatedSource="/WpfTetris;component/Resources/Images/Lose.gif" gif:ImageBehavior.AutoStart="True" gif:ImageBehavior.AnimateInDesignMode="True"  ></Image>
-      
-        <StackPanel Width="300"  HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Image Stretch="Fill" gif:ImageBehavior.AnimatedSource="/WpfTetris;component/Resources/Images/Lose.gif"
+               gif:ImageBehavior.AutoStart="True" gif:ImageBehavior.AnimateInDesignMode="True" />
+
+        <StackPanel Width="300" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel.Background>
                 <SolidColorBrush Color="Black" Opacity="0.4" />
             </StackPanel.Background>
-            <TextBlock Foreground="White" HorizontalAlignment="Center"  Margin="10" Text="Игра окончена." />
+            <TextBlock Foreground="White" HorizontalAlignment="Center" Margin="10" Text="Игра окончена." />
             <TextBlock Foreground="White" HorizontalAlignment="Center" Text="Выбирайте позицию фигур более разумно!" />
 
-            <StackPanel Margin="10"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel.Resources>
                     <Style TargetType="Button">
                         <Setter Property="BorderBrush" Value="Black" />
                         <Setter Property="BorderThickness" Value="2.5" />
                     </Style>
                 </StackPanel.Resources>
-                <Button Visibility="Collapsed" Padding="0" Width="202" Height="58" Content="Переиграть уровень"
-                        ui:UIAttachedProperty.SplitToRectanglesScale="20"
-                        ui:UIAttachedProperty.SplitToRectangles="True" />
+
                 <Button x:Name="ExitToMenu" Margin="5" Padding="0" Width="202" Height="58" Content="Выйти в меню"
                         ui:UIAttachedProperty.SplitToRectanglesScale="20"
-                        ui:UIAttachedProperty.SplitToRectangles="True" />
+                        ui:UIAttachedProperty.SplitToRectangles="True" Click="ExitToMenu_Click" />
             </StackPanel>
         </StackPanel>
     </Grid>

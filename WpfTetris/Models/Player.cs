@@ -5,7 +5,7 @@ namespace WpfTetris.Models
 {
     public class Player
     {
-       public readonly List<int> Scores = new List<int>();
+        public readonly List<int> Scores = new List<int>();
 
         public Player(string nickName)
         {

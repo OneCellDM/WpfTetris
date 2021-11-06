@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-      
+
     </UserControl.Resources>
 
     <Grid>
@@ -24,7 +24,7 @@
                 <TextBlock x:Name="LevelText" Style="{DynamicResource InfoTextStyle}" />
             </Border>
             <Border Style="{DynamicResource InfoBorderStyle}">
-                <TextBlock x:Name="ScoreText"  Style="{DynamicResource InfoTextStyle}" />
+                <TextBlock x:Name="ScoreText" Style="{DynamicResource InfoTextStyle}" />
             </Border>
             <Border Style="{DynamicResource InfoBorderStyle}">
                 <TextBlock x:Name="LineText" Style="{DynamicResource InfoTextStyle}" />
@@ -54,18 +54,20 @@
                 </StackPanel>
             </Border>
         </StackPanel>
-        <Border   Width="280"  Padding="0" Style="{DynamicResource InfoBorderStyle}" Margin="0" HorizontalAlignment="Left"
+        <Border Width="280" Padding="0" Style="{DynamicResource InfoBorderStyle}" Margin="0" HorizontalAlignment="Left"
                 VerticalAlignment="Bottom">
-            <Grid >
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition/>
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                    
-                <Border Grid.Column="0" Padding="0" BorderThickness="0,0,1,0" BorderBrush="White" Margin="0" Width="80" Height="80">
+
+                <Border Grid.Column="0" Padding="0" BorderThickness="0,0,1,0" BorderBrush="White" Margin="0" Width="80"
+                        Height="80">
                     <Image x:Name="AvatarImage" Stretch="Fill" />
                 </Border>
-                <TextBlock Grid.Column="1" TextWrapping="Wrap" HorizontalAlignment="Center"  x:Name="NickName" Margin="10,0" Text="Даниил" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="1" TextWrapping="Wrap" HorizontalAlignment="Center" x:Name="NickName"
+                           Margin="10,0" Text="Даниил" VerticalAlignment="Center" />
             </Grid>
         </Border>
     </Grid>

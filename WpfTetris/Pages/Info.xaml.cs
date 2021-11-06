@@ -1,10 +1,11 @@
 ﻿using System.Diagnostics;
+using System.Windows;
 using System.Windows.Controls;
 using WpfTetris.Interfaces;
 
 namespace WpfTetris.Pages
 {
-    public partial class Info : UserControl,ICloseControl
+    public partial class Info : UserControl, ICloseControl
     {
         public Info()
         {
@@ -13,17 +14,17 @@ namespace WpfTetris.Pages
 
         public event CloseControl CloseEvent;
 
-        private void Hyperlink_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
-
         }
 
-        private void WpfLink_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void WpfLink_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start(@"https://docs.microsoft.com/ru-ru/dotnet/desktop/wpf/introduction-to-wpf?view=netframeworkdesktop-4.8");
+            Process.Start(
+                @"https://docs.microsoft.com/ru-ru/dotnet/desktop/wpf/introduction-to-wpf?view=netframeworkdesktop-4.8");
         }
 
-        private void CloseButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             CloseEvent?.Invoke();
         }

@@ -14,10 +14,10 @@
     <ControlTemplate x:Key="SliderThumbHorizontalTop" TargetType="{x:Type Thumb}">
         <Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center">
             <Path x:Name="grip"
-                      Data="M 0,6 C0,6 5.5,0 5.5,0 5.5,0 11,6 11,6 11,6 11,18 11,18 11,18 0,18 0,18 0,18 0,6 0,6 z"
-                      Fill="{StaticResource SliderThumb.Static.Background}" Stretch="Fill" SnapsToDevicePixels="True"
-                      Stroke="{StaticResource SliderThumb.Static.Border}" StrokeThickness="1" UseLayoutRounding="True"
-                      VerticalAlignment="Center" />
+                  Data="M 0,6 C0,6 5.5,0 5.5,0 5.5,0 11,6 11,6 11,6 11,18 11,18 11,18 0,18 0,18 0,18 0,6 0,6 z"
+                  Fill="{StaticResource SliderThumb.Static.Background}" Stretch="Fill" SnapsToDevicePixels="True"
+                  Stroke="{StaticResource SliderThumb.Static.Border}" StrokeThickness="1" UseLayoutRounding="True"
+                  VerticalAlignment="Center" />
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
@@ -37,10 +37,10 @@
     <ControlTemplate x:Key="SliderThumbHorizontalBottom" TargetType="{x:Type Thumb}">
         <Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center">
             <Path x:Name="grip"
-                      Data="M 0,12 C0,12 5.5,18 5.5,18 5.5,18 11,12 11,12 11,12 11,0 11,0 11,0 0,0 0,0 0,0 0,12 0,12 z"
-                      Fill="{StaticResource SliderThumb.Static.Background}" Stretch="Fill" SnapsToDevicePixels="True"
-                      Stroke="{StaticResource SliderThumb.Static.Border}" StrokeThickness="1" UseLayoutRounding="True"
-                      VerticalAlignment="Center" />
+                  Data="M 0,12 C0,12 5.5,18 5.5,18 5.5,18 11,12 11,12 11,12 11,0 11,0 11,0 0,0 0,0 0,0 0,12 0,12 z"
+                  Fill="{StaticResource SliderThumb.Static.Background}" Stretch="Fill" SnapsToDevicePixels="True"
+                  Stroke="{StaticResource SliderThumb.Static.Border}" StrokeThickness="1" UseLayoutRounding="True"
+                  VerticalAlignment="Center" />
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
@@ -68,7 +68,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RepeatButton}">
                     <Rectangle Fill="{TemplateBinding Background}" Height="{TemplateBinding Height}"
-                                   Width="{TemplateBinding Width}" />
+                               Width="{TemplateBinding Width}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -81,10 +81,10 @@
             <Grid Margin="0">
 
                 <Ellipse Width="Auto" Height="Auto" x:Name="grip" Fill="Black" Stretch="Fill"
-                             SnapsToDevicePixels="True" Stroke="{StaticResource SliderThumb.Static.Border}"
-                             StrokeThickness="0" UseLayoutRounding="True" Margin="0,4,0,7" />
+                         SnapsToDevicePixels="True" Stroke="{StaticResource SliderThumb.Static.Border}"
+                         StrokeThickness="0" UseLayoutRounding="True" Margin="0,4,0,7" />
                 <Path IsHitTestVisible="False"
-                          Data="M351.894,284.209v-12.198c0-8.92,7.257-16.177,16.177-16.177h16.01c17.564,0,31.853-14.29,31.853-31.853
+                      Data="M351.894,284.209v-12.198c0-8.92,7.257-16.177,16.177-16.177h16.01c17.564,0,31.853-14.29,31.853-31.853
 				c0-17.563-14.29-31.852-31.853-31.852h-16.01v15.675h16.01c8.921,0,16.179,7.257,16.179,16.177
 				c0,8.921-7.257,16.179-16.179,16.179h-16.01c-17.564,0-31.852,14.289-31.852,31.852v8.173h-9.161V111.172l-49.884,41.614h-42.408
 				l-50.872-41.337v168.734h-11.815c-9.658,0-17.736,6.889-19.582,16.01H56.034v97.722C56.034,459.028,109.006,512,174.118,512
@@ -102,14 +102,14 @@
 				s21.253-5.929,26.906-14.837h90.282c5.653,8.907,15.597,14.837,26.906,14.837c11.309,0,21.253-5.929,26.907-14.837h53.614
 				v-15.675h-48.702C359.886,328.943,359.902,328.496,359.902,328.046z"
 
-                          Fill="AliceBlue" Margin="6.15,7.3,7.45,12.05" Stretch="Fill" />
+                      Fill="AliceBlue" Margin="6.15,7.3,7.45,12.05" Stretch="Fill" />
             </Grid>
         </Grid>
     </ControlTemplate>
     <ControlTemplate x:Key="SliderHorizontal" TargetType="{x:Type Slider}">
         <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"
-                    SnapsToDevicePixels="True">
+                BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"
+                SnapsToDevicePixels="True">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -117,30 +117,30 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <TickBar x:Name="TopTick" Fill="{TemplateBinding Foreground}" Height="4" Margin="0,0,0,2"
-                             Placement="Top" Grid.Row="0" Visibility="Collapsed" />
+                         Placement="Top" Grid.Row="0" Visibility="Collapsed" />
                 <TickBar x:Name="BottomTick" Fill="{TemplateBinding Foreground}" Height="4" Margin="0,2,0,0"
-                             Placement="Bottom" Grid.Row="2" Visibility="Collapsed" />
+                         Placement="Bottom" Grid.Row="2" Visibility="Collapsed" />
                 <Border x:Name="TrackBackground" BorderBrush="{StaticResource SliderThumb.Track.Border}"
-                            BorderThickness="1" Background="{StaticResource SliderThumb.Track.Background}" Height="4.0"
-                            Margin="5,0" Grid.Row="1" VerticalAlignment="center">
+                        BorderThickness="1" Background="{StaticResource SliderThumb.Track.Background}" Height="4.0"
+                        Margin="5,0" Grid.Row="1" VerticalAlignment="center">
                     <Canvas Margin="-6,-1">
                         <Rectangle x:Name="PART_SelectionRange"
-                                       Fill="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Height="4.0"
-                                       Visibility="Hidden" />
+                                   Fill="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Height="4.0"
+                                   Visibility="Hidden" />
                     </Canvas>
                 </Border>
                 <Track x:Name="PART_Track" Grid.Row="1">
                     <Track.DecreaseRepeatButton>
                         <RepeatButton Command="{x:Static Slider.DecreaseLarge}"
-                                          Style="{StaticResource RepeatButtonTransparent}" />
+                                      Style="{StaticResource RepeatButtonTransparent}" />
                     </Track.DecreaseRepeatButton>
                     <Track.IncreaseRepeatButton>
                         <RepeatButton Command="{x:Static Slider.IncreaseLarge}"
-                                          Style="{StaticResource RepeatButtonTransparent}" />
+                                      Style="{StaticResource RepeatButtonTransparent}" />
                     </Track.IncreaseRepeatButton>
                     <Track.Thumb>
                         <Thumb x:Name="Thumb" Focusable="False" Height="48" Width="38" OverridesDefaultStyle="True"
-                                   Template="{StaticResource SliderThumbHorizontalDefault}" VerticalAlignment="Center" />
+                               Template="{StaticResource SliderThumbHorizontalDefault}" VerticalAlignment="Center" />
                     </Track.Thumb>
                 </Track>
             </Grid>
@@ -171,9 +171,9 @@
     <ControlTemplate x:Key="SliderThumbVerticalLeft" TargetType="{x:Type Thumb}">
         <Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center">
             <Path x:Name="grip"
-                      Data="M 6,11 C6,11 0,5.5 0,5.5 0,5.5 6,0 6,0 6,0 18,0 18,0 18,0 18,11 18,11 18,11 6,11 6,11 z"
-                      Fill="{StaticResource SliderThumb.Static.Background}" Stretch="Fill"
-                      Stroke="{StaticResource SliderThumb.Static.Border}" />
+                  Data="M 6,11 C6,11 0,5.5 0,5.5 0,5.5 6,0 6,0 6,0 18,0 18,0 18,0 18,11 18,11 18,11 6,11 6,11 z"
+                  Fill="{StaticResource SliderThumb.Static.Background}" Stretch="Fill"
+                  Stroke="{StaticResource SliderThumb.Static.Border}" />
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
@@ -193,9 +193,9 @@
     <ControlTemplate x:Key="SliderThumbVerticalRight" TargetType="{x:Type Thumb}">
         <Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center">
             <Path x:Name="grip"
-                      Data="M 12,11 C12,11 18,5.5 18,5.5 18,5.5 12,0 12,0 12,0 0,0 0,0 0,0 0,11 0,11 0,11 12,11 12,11 z"
-                      Fill="{StaticResource SliderThumb.Static.Background}" Stretch="Fill"
-                      Stroke="{StaticResource SliderThumb.Static.Border}" />
+                  Data="M 12,11 C12,11 18,5.5 18,5.5 18,5.5 12,0 12,0 12,0 0,0 0,0 0,0 0,11 0,11 0,11 12,11 12,11 z"
+                  Fill="{StaticResource SliderThumb.Static.Background}" Stretch="Fill"
+                  Stroke="{StaticResource SliderThumb.Static.Border}" />
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
@@ -215,8 +215,8 @@
     <ControlTemplate x:Key="SliderThumbVerticalDefault" TargetType="{x:Type Thumb}">
         <Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center">
             <Path x:Name="grip" Data="M0.5,0.5 L18.5,0.5 18.5,11.5 0.5,11.5z"
-                      Fill="{StaticResource SliderThumb.Static.Background}" Stretch="Fill"
-                      Stroke="{StaticResource SliderThumb.Static.Border}" />
+                  Fill="{StaticResource SliderThumb.Static.Background}" Stretch="Fill"
+                  Stroke="{StaticResource SliderThumb.Static.Border}" />
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
@@ -235,8 +235,8 @@
     </ControlTemplate>
     <ControlTemplate x:Key="SliderVertical" TargetType="{x:Type Slider}">
         <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"
-                    SnapsToDevicePixels="True">
+                BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"
+                SnapsToDevicePixels="True">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -244,31 +244,31 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TickBar x:Name="TopTick" Grid.Column="0" Fill="{TemplateBinding Foreground}" Margin="0,0,2,0"
-                             Placement="Left" Visibility="Collapsed" Width="4" />
+                         Placement="Left" Visibility="Collapsed" Width="4" />
                 <TickBar x:Name="BottomTick" Grid.Column="2" Fill="{TemplateBinding Foreground}" Margin="2,0,0,0"
-                             Placement="Right" Visibility="Collapsed" Width="4" />
+                         Placement="Right" Visibility="Collapsed" Width="4" />
                 <Border x:Name="TrackBackground" BorderBrush="{StaticResource SliderThumb.Track.Border}"
-                            BorderThickness="1" Background="{StaticResource SliderThumb.Track.Background}"
-                            Grid.Column="1" HorizontalAlignment="center" Margin="0,5" Width="4.0">
+                        BorderThickness="1" Background="{StaticResource SliderThumb.Track.Background}"
+                        Grid.Column="1" HorizontalAlignment="center" Margin="0,5" Width="4.0">
                     <Canvas Margin="-1,-6">
                         <Rectangle x:Name="PART_SelectionRange"
-                                       Fill="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"
-                                       Visibility="Hidden" Width="4.0" />
+                                   Fill="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"
+                                   Visibility="Hidden" Width="4.0" />
                     </Canvas>
                 </Border>
                 <Track x:Name="PART_Track" Grid.Column="1">
                     <Track.DecreaseRepeatButton>
                         <RepeatButton Command="{x:Static Slider.DecreaseLarge}"
-                                          Style="{StaticResource RepeatButtonTransparent}" />
+                                      Style="{StaticResource RepeatButtonTransparent}" />
                     </Track.DecreaseRepeatButton>
                     <Track.IncreaseRepeatButton>
                         <RepeatButton Command="{x:Static Slider.IncreaseLarge}"
-                                          Style="{StaticResource RepeatButtonTransparent}" />
+                                      Style="{StaticResource RepeatButtonTransparent}" />
                     </Track.IncreaseRepeatButton>
                     <Track.Thumb>
                         <Thumb x:Name="Thumb" Focusable="False" Height="11" OverridesDefaultStyle="True"
-                                   Template="{StaticResource SliderThumbVerticalDefault}" VerticalAlignment="Top"
-                                   Width="18" />
+                               Template="{StaticResource SliderThumbVerticalDefault}" VerticalAlignment="Top"
+                               Width="18" />
                     </Track.Thumb>
                 </Track>
             </Grid>

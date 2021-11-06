@@ -36,7 +36,7 @@
                     <Run
                         Text="{Binding Value, ElementName=VolumeSlider,Converter={StaticResource VolumeSliderConverter}}" />
                 </TextBlock>
-                <Slider Style="{DynamicResource SliderStyle}"  x:Name="VolumeSlider" Maximum="1" LargeChange="0.1" />
+                <Slider Style="{DynamicResource SliderStyle}" x:Name="VolumeSlider" Maximum="1" LargeChange="0.1" />
 
 
                 <TextBlock>
@@ -46,7 +46,8 @@
                         Text="{Binding Value, ElementName=StartDownDelaySlider,Converter={StaticResource DelayConverter}}" />
                 </TextBlock>
 
-                <Slider Style="{DynamicResource SliderStyle}" x:Name="StartDownDelaySlider" ValueChanged="StartDownDelaySlider_ValueChanged" />
+                <Slider Style="{DynamicResource SliderStyle}" x:Name="StartDownDelaySlider"
+                        ValueChanged="StartDownDelaySlider_ValueChanged" />
 
 
                 <TextBlock>
@@ -80,7 +81,7 @@
 
                 <StackPanel x:Name="ColorPanel" Visibility="Collapsed" Orientation="Horizontal">
 
-                    
+
                     <TextBlock Text="Цвет тени:" VerticalAlignment="Center" />
                     <ListView Margin="10,0" x:Name="ColorList" SelectedIndex="0" Background="Transparent">
                         <ListView.ItemsPanel>

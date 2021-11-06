@@ -4,6 +4,17 @@ namespace WpfTetris
 {
     public static class Settings
     {
+        static Settings()
+        {
+            StartDownDelay = 500;
+            EndDownDelay = 100;
+            DelayChange = 25;
+            NextLevelScore = 3000;
+            AudioVolume = 0.5;
+            ShadowColor = new SolidColorBrush(Brushes.Blue.Color) {Opacity = 0.4};
+            ShadowShow = false;
+        }
+
         //Задержка падения фигуры в начале игры
         public static double StartDownDelay { get; set; }
 
@@ -25,16 +36,5 @@ namespace WpfTetris
         public static double AudioVolume { get; set; }
 
         public static bool ShadowShow { get; set; }
-
-        static Settings()
-        {
-            StartDownDelay = 500;
-            EndDownDelay = 100;
-            DelayChange = 25;
-            NextLevelScore = 3000;
-            AudioVolume = 0.5;
-            ShadowColor = new SolidColorBrush(Brushes.Blue.Color) {Opacity = 0.4};
-            ShadowShow = false;
-        }
     }
 }
