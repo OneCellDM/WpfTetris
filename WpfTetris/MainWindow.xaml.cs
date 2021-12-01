@@ -67,7 +67,10 @@ namespace WpfTetris
 
         private void HelpPage_CloseEvent()
         {
-            OpenPage(MenuPage);
+            if (Game.GameIsPaused)
+                OpenPage(PausePage);
+            
+            else OpenPage(MenuPage);
         }
 
         private void MenuPage_OpenHelpEvent()
@@ -97,6 +100,7 @@ namespace WpfTetris
 
         private void PausePage_OpenHelpEvent()
         {
+            OpenPage(HelpPage);
         }
 
         private void PausePage_ExitEvent()

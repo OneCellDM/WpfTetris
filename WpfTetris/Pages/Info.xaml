@@ -33,13 +33,6 @@
                     </Hyperlink>
                 </TextBlock>
 
-
-                <TextBlock>
-                    <Run Text="Сайт" FontSize="30" />
-                    <LineBreak />
-                    <Hyperlink />
-                </TextBlock>
-
                 <TextBlock Text="Создатели игры" FontSize="30" />
                 <TextBlock Text="Разработчик игры: Мурзак Даниил" />
                 <TextBlock Text="Project Manager: Сафонов Андрей" />

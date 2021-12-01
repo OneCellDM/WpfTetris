@@ -12,6 +12,7 @@ namespace WpfTetris
     {
         public static List<Player> Players = new List<Player>();
         private static Player _CurrentPlayer;
+        
 
         static PlayerManager()
         {

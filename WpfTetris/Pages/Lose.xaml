@@ -28,8 +28,7 @@
                 </StackPanel.Resources>
 
                 <Button x:Name="ExitToMenu" Margin="5" Padding="0" Width="202" Height="58" Content="Выйти в меню"
-                        ui:UIAttachedProperty.SplitToRectanglesScale="20"
-                        ui:UIAttachedProperty.SplitToRectangles="True" Click="ExitToMenu_Click" />
+                         Click="ExitToMenu_Click" />
             </StackPanel>
         </StackPanel>
     </Grid>

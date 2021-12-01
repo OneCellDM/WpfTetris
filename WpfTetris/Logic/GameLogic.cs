@@ -35,23 +35,29 @@ namespace WpfTetris.Logic
         {
             {1, 100}, {2, 400}, {3, 800}, {4, 1200}
         };
-
+       
         private readonly List<Rectangle> _Segments = new List<Rectangle>();
         private readonly bool Isvideo;
         private readonly Random random;
         private MediaPlayer _AudioPlayer;
         private int _color;
+        private int _nextColor;
         public Level _Gamelevel;
+        public bool GameIsPaused = false;
         private int _Level = 1;
         private int _Line;
         private int _Score;
         private int _Time;
+        private int figureSpawnXOffset = 0;
+
         private bool Check;
         private int currentScore;
         private Timer DownTimer;
         private Timer DrawTimer;
+        
 
         public Game Game;
+
         private Timer TimeTimer;
 
 
@@ -150,12 +156,13 @@ namespace WpfTetris.Logic
                             {
                                 Width = Scale - 2,
                                 Height = Scale - 2,
-                                Fill = Brushes.Red,
-                                Margin = new Thickness(NextShape[i, 0] * Scale, NextShape[i, 1] * Scale, 0, 0)
+                                Fill = GameColors.GetBrush(_nextColor),
+                                Margin = new Thickness((NextShape[i, 0]-figureSpawnXOffset) * Scale, NextShape[i, 1] * Scale, 0, 0)
                             });
                     });
             }
         }
+        
 
         public void Dispose()
         {
@@ -211,6 +218,7 @@ namespace WpfTetris.Logic
                 {
                     case Key.Escape:
                         PauseEvent?.Invoke();
+                        GameIsPaused = true;
                         break;
                     case Key.Left:
                     case Key.A:
@@ -275,6 +283,7 @@ namespace WpfTetris.Logic
         {
             AreaInit();
             _color = GameColors.GetRandomColorIndex();
+            _nextColor = GameColors.GetRandomColorIndex();
             Fill();
             InitTimers(Settings.StartDownDelay);
             SubscribeTimers();
@@ -302,6 +311,7 @@ namespace WpfTetris.Logic
         {
             Game.Dispatcher.Invoke(() =>
             {
+                GameIsPaused = false;         
                 StartTimers();
                 _AudioPlayer.Play();
                 if (Isvideo)
@@ -537,28 +547,30 @@ namespace WpfTetris.Logic
 
         public int[,] RandomShape()
         {
+            figureSpawnXOffset = random.Next(0, 8);
+
             switch (random.Next(7))
             {
                 //T
-                case 0: return new[,] {{0, 0}, {1, 0}, {2, 0}, {1, 1}};
+                case 0: return new[,] {{0+figureSpawnXOffset, 0}, {1+ figureSpawnXOffset, 0}, {2+ figureSpawnXOffset, 0}, {1+ figureSpawnXOffset, 1}};
 
                 //L
-                case 1: return new[,] {{0, 0}, {0, 1}, {0, 2}, {1, 2}};
+                case 1: return new[,] {{0+ figureSpawnXOffset, 0}, {0+ figureSpawnXOffset, 1}, {0+ figureSpawnXOffset, 2}, {1+ figureSpawnXOffset, 2}};
 
                 //|
-                case 2: return new[,] {{0, 0}, {0, 1}, {0, 2}, {0, 3}};
+                case 2: return new[,] {{0+ figureSpawnXOffset, 0}, {0+ figureSpawnXOffset, 1}, {0+ figureSpawnXOffset, 2}, {0+ figureSpawnXOffset, 3}};
 
                 //Квадрат
-                case 3: return new[,] {{0, 0}, {1, 0}, {0, 1}, {1, 1}};
+                case 3: return new[,] {{0+ figureSpawnXOffset, 0}, {1+ figureSpawnXOffset, 0}, {0+ figureSpawnXOffset, 1}, {1+ figureSpawnXOffset, 1}};
 
                 //j
-                case 4: return new[,] {{1, 0}, {1, 1}, {1, 2}, {0, 2}};
+                case 4: return new[,] {{1+ figureSpawnXOffset, 0}, {1+ figureSpawnXOffset, 1}, {1+ figureSpawnXOffset, 2}, {0+ figureSpawnXOffset, 2}};
 
                 //Z
-                case 5: return new[,] {{0, 0}, {1, 0}, {1, 1}, {2, 1}};
+                case 5: return new[,] {{0+ figureSpawnXOffset, 0}, {1+ figureSpawnXOffset, 0}, {1+ figureSpawnXOffset, 1}, {2+ figureSpawnXOffset, 1}};
 
                 //S
-                case 6: return new[,] {{1, 0}, {2, 0}, {0, 1}, {1, 1}};
+                case 6: return new[,] {{1+ figureSpawnXOffset, 0}, {2+ figureSpawnXOffset, 0}, {0+ figureSpawnXOffset, 1}, {1+ figureSpawnXOffset, 1}};
             }
 
             return new[,] {{0, 0}, {0, 0}, {0, 0}, {0, 0}};
@@ -606,7 +618,7 @@ namespace WpfTetris.Logic
                     {
                         var temp = _Shape[i, 0];
                         var x = maxy - (maxx - _Shape[i, 1]);
-                        var y = maxx - (4 - (maxy - temp)) + 1;
+                         var y = maxx - (4 - (maxy - temp)) + 1;
                         _Shape[i, 0] = x;
                         _Shape[i, 1] = y;
                     }
@@ -725,7 +737,8 @@ namespace WpfTetris.Logic
                         ShapeFreeze();
                         RemoveLines();
 
-                        _color = GameColors.GetRandomColorIndex();
+                        _color = _nextColor;
+                        _nextColor= GameColors.GetRandomColorIndex();
                         _Shape = NextShape;
                         NextShape = null;
                         for (var i = 0; i < 4; i++)
@@ -796,7 +809,9 @@ namespace WpfTetris.Logic
 
         public void Activated(object sender, EventArgs e)
         {
-            ResumeGame();
+            if(!GameIsPaused) 
+                ResumeGame();
+
         }
 
         public void Deactivated(object sender, EventArgs e)
