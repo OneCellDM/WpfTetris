@@ -3,7 +3,7 @@
 
 <p align="center">
 <p align="center">
-
+![logo](https://github.com/OneCellDM/WpfTetris/blob/master/spedwagon.png)
 
 <h2 align="center">Description-Описание</h2>
 <p align="center">WPF version of classic Tetris game.
