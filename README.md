@@ -3,7 +3,7 @@
 <h2 align="center"> Created by sPEDwagon team. </h2>
 
 ![logo](https://github.com/OneCellDM/WpfTetris/blob/master/spedwagon.png)
-
+<h2 align="center">Team website-Сайт команды:http://spedwagon.online/</h3>
 <h3 align="center">Description-Описание</h3>
 <p align="center">WPF version of classic Tetris game.
 <p align="center" >WPF версия классической игры Tetris.
