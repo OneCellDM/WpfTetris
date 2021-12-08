@@ -345,6 +345,7 @@ namespace WpfTetris.Logic
 
         private void EndGame()
         {
+            GameIsPaused = false;
             StopGame();
             Game.Dispatcher.Invoke(() =>
             {

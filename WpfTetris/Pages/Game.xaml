@@ -67,7 +67,7 @@
                     <Image x:Name="AvatarImage" Stretch="Fill" />
                 </Border>
                 <TextBlock Grid.Column="1" TextWrapping="Wrap" HorizontalAlignment="Center" x:Name="NickName"
-                           Margin="10,0" Text="Даниил" VerticalAlignment="Center" />
+                           Margin="10,0" Text="Неизвестный" VerticalAlignment="Center" />
             </Grid>
         </Border>
     </Grid>

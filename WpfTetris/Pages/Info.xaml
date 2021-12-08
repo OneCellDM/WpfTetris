@@ -32,6 +32,21 @@
                         WPF
                     </Hyperlink>
                 </TextBlock>
+                
+                <TextBlock>
+                    <Run Text="Сайт команды:" />
+                    <Hyperlink x:Name="webSite"  Click="webSite_Click"
+                               NavigateUri="http://spedwagon.online/">
+                        spedwagon.online
+                    </Hyperlink>
+                </TextBlock>
+                <TextBlock>
+                    <Run Text="Исходный код проекта:" />
+                    <Hyperlink x:Name="Guthub"  Click="Guthub_Click"
+                               NavigateUri="https://github.com/OneCellDM/WpfTetris">
+                        GitHub
+                    </Hyperlink>
+                </TextBlock>
 
                 <TextBlock Text="Создатели игры" FontSize="30" />
                 <TextBlock Text="Разработчик игры: Мурзак Даниил" />

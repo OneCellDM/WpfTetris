@@ -67,10 +67,15 @@ namespace WpfTetris
 
         private void HelpPage_CloseEvent()
         {
-            if (Game.GameIsPaused)
+
+
+            if (Game != null && Game.GameIsPaused)
+            {
                 OpenPage(PausePage);
+                return;
+            }
             
-            else OpenPage(MenuPage);
+            OpenPage(MenuPage);
         }
 
         private void MenuPage_OpenHelpEvent()
@@ -107,10 +112,13 @@ namespace WpfTetris
         {
             if (Game != null)
             {
+
+                Game.GameIsPaused = false;
                 Game.StopGame();
                 OpenPage(MenuPage);
                 PausePage.VolumeSlider.ValueChanged -= VolumeSlider_ValueChanged;
                 UnSubscribeGamesEvent();
+
             }
         }
 

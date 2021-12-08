@@ -7,7 +7,7 @@
 
         mc:Ignorable="d"
 
-        Title="MainWindow" FontSize="18" FontFamily="./Resources/#PT Sans Narrow"
+        Title="Tetris By sPEDwagon" FontSize="18" FontFamily="./Resources/#PT Sans Narrow"
 
         Height="589.2"
         Width="800" Foreground="White">

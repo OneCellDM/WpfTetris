@@ -28,5 +28,16 @@ namespace WpfTetris.Pages
         {
             CloseEvent?.Invoke();
         }
-    }
+
+		private void webSite_Click(object sender, RoutedEventArgs e)
+		{
+            Process.Start(
+                @"http://spedwagon.online/");
+        }
+
+		private void Guthub_Click(object sender, RoutedEventArgs e)
+		{
+            Process.Start(@"https://github.com/OneCellDM/WpfTetris");
+        }
+	}
 }
